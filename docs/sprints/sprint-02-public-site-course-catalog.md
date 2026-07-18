@@ -2,7 +2,7 @@
 
 ## Goal
 
-Build the public MSS course-selling website foundation with course catalog, packages, course details, and enrollment checkout skeleton.
+Build the public MSS course-selling website foundation with course catalog, packages, course details, enrollment checkout skeleton, and optimized public routing.
 
 ## Completed
 
@@ -29,6 +29,8 @@ Build the public MSS course-selling website foundation with course catalog, pack
 - [x] Updated homepage with featured courses, stats, and role-based feature sections
 - [x] Fixed Unicode encoding issues for taka symbol and check icons
 - [x] Added hover and interaction polish
+- [x] Refactored routes to lazy-load route components
+- [x] Reduced initial production bundle below Angular budget
 - [x] Verified public pages visually
 - [x] Verified production build
 
@@ -46,6 +48,8 @@ Build the public MSS course-selling website foundation with course catalog, pack
 
 Course, package, and enrollment data are currently static/mock data. This is intentional for Sprint 2. Real dynamic data will be connected after Supabase schema, RLS, admin course management, and teacher content management are implemented.
 
+Route components are now lazy-loaded, so the first production bundle stays lighter and page-specific code loads only when needed.
+
 ## Acceptance Criteria
 
 - [x] Public homepage loads correctly
@@ -55,3 +59,4 @@ Course, package, and enrollment data are currently static/mock data. This is int
 - [x] Enrollment page loads correctly
 - [x] Public CTAs route to the correct pages
 - [x] App builds successfully
+- [x] Initial bundle stays under the configured production budget
