@@ -18,3 +18,11 @@ export interface CoursePackage {
   isPopular?: boolean;
   ctaLabel: string;
 }
+
+export interface CoursePackageItem {
+  id: string;
+  packageId: string;
+  courseId: string;
+  position: number;
+  createdAt: string;
+}

@@ -38,3 +38,22 @@ Create the Supabase database foundation for MSS with relational schema, enum typ
 This migration creates the backend foundation only. Real Supabase connection, seed data, Storage buckets, Edge Functions, and production-safe policy tightening will be handled in later Sprint 3 steps.
 
 Mock frontend data remains unchanged for now.
+
+## Sprint 3B Completed
+
+- [x] Added course package items table
+- [x] Added package-to-course mapping support
+- [x] Added active course access helper function
+- [x] Added unique enrollment indexes
+- [x] Tightened lesson material access policy
+- [x] Allowed enrolled students to access protected lessons
+- [x] Added published public seed courses
+- [x] Added published public seed packages
+- [x] Added package-to-course seed mappings
+- [x] Updated package model with CoursePackageItem
+
+## Sprint 3B Notes
+
+The first schema draft allowed all published lesson materials to be publicly selectable. Sprint 3B tightens this by requiring either staff access or active enrollment-based course access.
+
+Seed data mirrors the current mock frontend catalog so the UI can later be switched from static arrays to Supabase queries without changing the product content structure.
