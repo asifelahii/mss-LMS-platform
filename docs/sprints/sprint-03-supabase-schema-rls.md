@@ -87,3 +87,18 @@ Bucket creation itself should be done through Supabase Dashboard, API, or suppor
 ## Sprint 3D Notes
 
 The database uses snake_case columns, while Angular UI models use camelCase fields. Sprint 3D creates the first clean mapping layer so future Supabase queries can be connected without leaking database column names into UI components.
+
+## Sprint 3E Completed
+
+- [x] Added public catalog data service
+- [x] Added published courses query
+- [x] Added published course-by-slug query
+- [x] Added published packages query
+- [x] Added published package-by-slug query
+- [x] Connected Supabase rows to existing catalog mappers
+- [x] Added catalog data service unit tests
+- [x] Exported catalog data service from data-access
+
+## Sprint 3E Notes
+
+The frontend still uses mock arrays for visible pages. This service prepares the database-backed transition without breaking the current UI. Once Supabase project credentials and local/remote migrations are verified, public pages can switch from mock data to `CatalogDataService`.
