@@ -102,3 +102,23 @@ The database uses snake_case columns, while Angular UI models use camelCase fiel
 ## Sprint 3E Notes
 
 The frontend still uses mock arrays for visible pages. This service prepares the database-backed transition without breaking the current UI. Once Supabase project credentials and local/remote migrations are verified, public pages can switch from mock data to `CatalogDataService`.
+
+## Sprint 3F Completed
+
+- [x] Added enrollment database row type
+- [x] Added payment request database row type
+- [x] Added payment method and payment status database types
+- [x] Added enrollment/payment creation input DTO
+- [x] Added enrollment/payment creation result DTO
+- [x] Added EnrollmentDataService
+- [x] Added create enrollment with payment request workflow
+- [x] Added student enrollment listing query
+- [x] Added student payment request listing query
+- [x] Added enrollment data service unit tests
+- [x] Exported enrollment data service from data-access
+
+## Sprint 3F Notes
+
+The enrollment workflow is prepared as a two-step database operation: first create a pending enrollment, then create a pending payment request linked to that enrollment. RLS will require the authenticated user to match the submitted student ID.
+
+The current public `/enroll` page still submits locally. It will be connected to this service after auth and real Supabase project credentials are ready.

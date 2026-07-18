@@ -5,6 +5,9 @@ export type DbCourseMode = 'recorded' | 'live' | 'hybrid';
 export type DbCourseLevel = 'beginner' | 'intermediate' | 'advanced';
 export type DbCourseAccessType = 'free' | 'paid';
 export type DbPackageType = 'single_subject' | 'full_year' | 'revision_batch' | 'free_demo';
+export type DbEnrollmentStatus = 'pending' | 'active' | 'expired' | 'revoked' | 'rejected';
+export type DbPaymentMethod = 'bkash' | 'nagad' | 'rocket' | 'bank_transfer';
+export type DbPaymentStatus = 'pending' | 'approved' | 'rejected';
 
 export interface DbCourseRow {
   id: string;
@@ -68,6 +71,41 @@ export interface DbProfileRow {
   role: DbAppRole;
   status: DbProfileStatus;
   avatar_path: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface DbEnrollmentRow {
+  id: string;
+  student_id: string;
+  course_id: string | null;
+  package_id: string | null;
+  batch_id: string | null;
+  status: DbEnrollmentStatus;
+  starts_at: string | null;
+  expires_at: string | null;
+  approved_by: string | null;
+  approved_at: string | null;
+  rejected_reason: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface DbPaymentRequestRow {
+  id: string;
+  enrollment_id: string | null;
+  student_id: string;
+  method: DbPaymentMethod;
+  amount: number;
+  currency: string;
+  sender_number: string;
+  transaction_id: string;
+  proof_path: string | null;
+  note: string | null;
+  status: DbPaymentStatus;
+  reviewed_by: string | null;
+  reviewed_at: string | null;
+  rejection_reason: string | null;
   created_at: string;
   updated_at: string;
 }
