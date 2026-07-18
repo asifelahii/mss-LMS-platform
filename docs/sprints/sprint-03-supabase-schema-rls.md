@@ -122,3 +122,19 @@ The frontend still uses mock arrays for visible pages. This service prepares the
 The enrollment workflow is prepared as a two-step database operation: first create a pending enrollment, then create a pending payment request linked to that enrollment. RLS will require the authenticated user to match the submitted student ID.
 
 The current public `/enroll` page still submits locally. It will be connected to this service after auth and real Supabase project credentials are ready.
+
+## Sprint 3G Completed
+
+- [x] Added Supabase project setup guide
+- [x] Documented real project credential setup
+- [x] Documented migration application plan
+- [x] Documented storage bucket creation plan
+- [x] Documented first admin creation plan
+- [x] Documented backend verification checklist
+- [x] Documented frontend data-service transition status
+
+## Sprint 3G Notes
+
+Sprint 3 now has database migrations, storage policy foundations, typed data-access models, catalog services, enrollment/payment services, and setup documentation.
+
+The next sprint should connect authentication and real Supabase project credentials, then move the public catalog from mock arrays to database-backed services.
