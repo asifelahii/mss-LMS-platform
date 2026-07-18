@@ -4,4 +4,7 @@ export const environment = {
     url: '',
     anonKey: '',
   },
+  auth: {
+    enableRouteGuards: false,
+  },
 } as const;

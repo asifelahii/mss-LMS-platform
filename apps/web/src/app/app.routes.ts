@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 
+import { authGuard, guestGuard, roleGuard } from '@mss-platform/auth';
+
 import { DashboardLayoutComponent } from './layouts/dashboard-layout.component';
 import { PublicLayoutComponent } from './layouts/public-layout.component';
 import { LoginPageComponent } from './pages/auth/login.page';
@@ -28,11 +30,13 @@ export const routes: Routes = [
       {
         path: 'login',
         component: LoginPageComponent,
+        canActivate: [guestGuard],
         title: 'Login | MSS',
       },
       {
         path: 'register',
         component: RegisterPageComponent,
+        canActivate: [guestGuard],
         title: 'Register | MSS',
       },
     ],
@@ -40,6 +44,7 @@ export const routes: Routes = [
   {
     path: 'student',
     component: DashboardLayoutComponent,
+    canActivate: [authGuard, roleGuard(['student', 'admin', 'super_admin'])],
     data: {
       portal: 'student',
     },
@@ -54,6 +59,7 @@ export const routes: Routes = [
   {
     path: 'teacher',
     component: DashboardLayoutComponent,
+    canActivate: [authGuard, roleGuard(['teacher', 'admin', 'super_admin'])],
     data: {
       portal: 'teacher',
     },
@@ -68,6 +74,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: DashboardLayoutComponent,
+    canActivate: [authGuard, roleGuard(['admin', 'super_admin'])],
     data: {
       portal: 'admin',
     },
