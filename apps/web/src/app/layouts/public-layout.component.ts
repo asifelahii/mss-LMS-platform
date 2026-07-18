@@ -18,6 +18,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
         <nav class="mss-public-nav" aria-label="Public navigation">
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
           <a routerLink="/courses" routerLinkActive="active">Courses</a>
+          <a routerLink="/packages" routerLinkActive="active">Packages</a>
           <a routerLink="/login" routerLinkActive="active">Login</a>
           <a routerLink="/register" class="mss-nav-cta">Enroll Now</a>
         </nav>

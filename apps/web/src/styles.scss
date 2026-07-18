@@ -727,3 +727,163 @@ a {
     transform: none !important;
   }
 }
+
+.mss-packages-hero,
+.mss-package-grid,
+.mss-payment-flow {
+  margin-inline: auto;
+  width: min(100% - 2rem, 96rem);
+}
+
+.mss-packages-hero {
+  padding-block: clamp(2rem, 5vw, 4rem);
+}
+
+.mss-packages-hero h1 {
+  margin: 0;
+  color: var(--mss-text);
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  letter-spacing: -0.05em;
+}
+
+.mss-packages-hero p {
+  max-width: 50rem;
+  color: var(--mss-muted);
+  line-height: 1.7;
+}
+
+.mss-package-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.mss-package-card {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  border: 1px solid var(--mss-border);
+  border-radius: 1.6rem;
+  background: #ffffff;
+  padding: 1.25rem;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.mss-package-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(15, 76, 129, 0.25);
+  box-shadow: 0 20px 44px rgba(15, 32, 43, 0.1);
+}
+
+.mss-package-card.is-popular {
+  border-color: rgba(15, 118, 110, 0.45);
+  background:
+    radial-gradient(circle at top right, rgba(15, 118, 110, 0.12), transparent 18rem),
+    #ffffff;
+}
+
+.mss-package-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border-radius: 999px;
+  background: var(--mss-accent);
+  color: #ffffff;
+  padding: 0.42rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.mss-package-card h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.mss-package-card p {
+  margin: 0;
+  color: var(--mss-muted);
+  line-height: 1.55;
+}
+
+.mss-package-price span {
+  display: block;
+  color: var(--mss-muted);
+  text-decoration: line-through;
+}
+
+.mss-package-price strong {
+  display: block;
+  color: var(--mss-primary-dark);
+  font-size: 2rem;
+}
+
+.mss-package-recommended {
+  border-radius: 1rem;
+  background: var(--mss-surface-soft);
+  padding: 0.8rem;
+  font-weight: 700;
+}
+
+.mss-package-card ul {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--mss-muted);
+}
+
+.mss-payment-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(18rem, 1.05fr);
+  gap: 2rem;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+  border-radius: 2rem;
+  background: var(--mss-primary-dark);
+  color: #ffffff;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.mss-payment-flow p,
+.mss-payment-flow .mss-eyebrow {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.mss-payment-flow h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  letter-spacing: -0.04em;
+}
+
+.mss-flow-steps {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.mss-flow-steps span {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  font-weight: 800;
+}
+
+@media (max-width: 1100px) {
+  .mss-package-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mss-payment-flow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .mss-package-grid {
+    grid-template-columns: 1fr;
+  }
+}

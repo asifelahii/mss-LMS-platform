@@ -9,6 +9,7 @@ import { RegisterPageComponent } from './pages/auth/register.page';
 import { AdminDashboardPageComponent } from './pages/admin/admin-dashboard.page';
 import { CourseCatalogPageComponent } from './pages/public/course-catalog.page';
 import { CourseDetailPageComponent } from './pages/public/course-detail.page';
+import { PackagesPageComponent } from './pages/public/packages.page';
 import { PublicHomePageComponent } from './pages/public/public-home.page';
 import { StudentDashboardPageComponent } from './pages/student/student-dashboard.page';
 import { TeacherDashboardPageComponent } from './pages/teacher/teacher-dashboard.page';
@@ -32,6 +33,11 @@ export const routes: Routes = [
         path: 'courses/:slug',
         component: CourseDetailPageComponent,
         title: 'Course Details | MSS',
+      },
+      {
+        path: 'packages',
+        component: PackagesPageComponent,
+        title: 'Packages | MSS',
       },
       {
         path: 'login',
