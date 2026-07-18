@@ -887,3 +887,196 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+.mss-stats-strip,
+.mss-feature-grid,
+.mss-detail-grid,
+.mss-content-preview,
+.mss-teacher-enrollment-grid {
+  margin-inline: auto;
+  width: min(100% - 2rem, 96rem);
+}
+
+.mss-stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.mss-stats-strip article {
+  border: 1px solid var(--mss-border);
+  border-radius: 1.4rem;
+  background: #ffffff;
+  padding: 1.25rem;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.mss-stats-strip article:hover {
+  transform: translateY(-4px);
+  border-color: rgba(15, 76, 129, 0.24);
+  box-shadow: 0 18px 38px rgba(15, 32, 43, 0.08);
+}
+
+.mss-stats-strip strong {
+  display: block;
+  color: var(--mss-primary-dark);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.mss-stats-strip span {
+  color: var(--mss-muted);
+  font-weight: 700;
+}
+
+.mss-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.mss-feature-grid article,
+.mss-detail-panel,
+.mss-content-preview,
+.mss-teacher-card,
+.mss-enroll-card {
+  border: 1px solid var(--mss-border);
+  border-radius: 1.6rem;
+  background: #ffffff;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.mss-feature-grid article {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.mss-feature-grid article:hover {
+  transform: translateY(-4px);
+  border-color: rgba(15, 118, 110, 0.28);
+  box-shadow: 0 18px 38px rgba(15, 32, 43, 0.08);
+}
+
+.mss-feature-grid h2,
+.mss-detail-panel h2,
+.mss-content-preview h2,
+.mss-teacher-card h2,
+.mss-enroll-card h2 {
+  margin: 0;
+  color: var(--mss-text);
+  letter-spacing: -0.035em;
+}
+
+.mss-feature-grid p,
+.mss-detail-panel p,
+.mss-content-preview p,
+.mss-teacher-card p,
+.mss-enroll-card p {
+  color: var(--mss-muted);
+  line-height: 1.65;
+}
+
+.mss-detail-grid,
+.mss-teacher-enrollment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.mss-check-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.mss-check-list span {
+  position: relative;
+  border-radius: 1rem;
+  background: var(--mss-surface-soft);
+  color: var(--mss-primary-dark);
+  padding: 0.85rem 1rem 0.85rem 2.4rem;
+  font-weight: 800;
+}
+
+.mss-check-list span::before {
+  position: absolute;
+  top: 0.82rem;
+  left: 0.9rem;
+  color: var(--mss-success);
+  content: '?';
+  font-weight: 900;
+}
+
+.mss-content-preview {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(18rem, 1.2fr);
+  gap: 1.5rem;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.mss-preview-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.mss-preview-list article {
+  display: grid;
+  gap: 0.25rem;
+  border: 1px solid var(--mss-border);
+  border-radius: 1rem;
+  background: var(--mss-surface-soft);
+  padding: 1rem;
+}
+
+.mss-preview-list span {
+  color: var(--mss-accent);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.mss-preview-list strong {
+  color: var(--mss-primary-dark);
+}
+
+.mss-preview-list small {
+  color: var(--mss-muted);
+  line-height: 1.5;
+}
+
+.mss-enroll-card {
+  background:
+    radial-gradient(circle at top right, rgba(15, 118, 110, 0.12), transparent 18rem),
+    #ffffff;
+}
+
+.mss-enroll-card ol {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1rem 0 1.5rem;
+  padding-left: 1.2rem;
+  color: var(--mss-muted);
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .mss-stats-strip,
+  .mss-feature-grid,
+  .mss-detail-grid,
+  .mss-content-preview,
+  .mss-teacher-enrollment-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Fix encoded check icons in course detail lists */
+.mss-check-list span::before {
+  content: '\2713';
+}

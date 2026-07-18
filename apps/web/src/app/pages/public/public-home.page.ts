@@ -14,7 +14,7 @@ import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
         <p class="mss-eyebrow">Bangla-first coaching platform</p>
         <h1>Premium Math & Science courses for serious academic learners.</h1>
         <p>
-          MSS will provide structured courses, batches, lessons, notes, quizzes,
+          MSS provides structured courses, batches, lessons, notes, quizzes,
           payment approval, teacher dashboards, and protected student learning access.
         </p>
 
@@ -25,10 +25,29 @@ import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
       </div>
 
       <div class="mss-hero-card">
-        <span>Locked Product Direction</span>
-        <strong>Angular + Supabase + Nx Monorepo</strong>
-        <p>Production architecture first. Free-resource-first development.</p>
+        <span>Production-ready direction</span>
+        <strong>Course selling + student learning + teacher/admin operations</strong>
+        <p>Built with Angular, Nx monorepo, Supabase, and free-resource-first development.</p>
       </div>
+    </section>
+
+    <section class="mss-stats-strip">
+      <article>
+        <strong>4+</strong>
+        <span>Course tracks planned</span>
+      </article>
+      <article>
+        <strong>3</strong>
+        <span>Payment methods</span>
+      </article>
+      <article>
+        <strong>5</strong>
+        <span>Role-based portals</span>
+      </article>
+      <article>
+        <strong>Free-first</strong>
+        <span>Resource strategy</span>
+      </article>
     </section>
 
     <section class="mss-home-section">
@@ -45,6 +64,26 @@ import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
           <mss-course-card [course]="course" />
         }
       </div>
+    </section>
+
+    <section class="mss-feature-grid">
+      <article>
+        <p class="mss-eyebrow">For Students</p>
+        <h2>Learn from one organized dashboard.</h2>
+        <p>Access enrolled courses, lessons, PDFs, quizzes, payment status, and support tickets.</p>
+      </article>
+
+      <article>
+        <p class="mss-eyebrow">For Teachers</p>
+        <h2>Manage content without developer help.</h2>
+        <p>Create chapters, upload materials, add lessons, schedule releases, and track progress.</p>
+      </article>
+
+      <article>
+        <p class="mss-eyebrow">For Admins</p>
+        <h2>Control payment and access workflows.</h2>
+        <p>Approve payments, manage enrollments, handle support, and monitor audit logs.</p>
+      </article>
     </section>
 
     <section class="mss-enrollment-strip">
