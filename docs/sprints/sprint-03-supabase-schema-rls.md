@@ -74,3 +74,16 @@ Seed data mirrors the current mock frontend catalog so the UI can later be switc
 Bucket creation itself should be done through Supabase Dashboard, API, or supported tooling. The project migration defines access policies on `storage.objects`.
 
 `lesson-materials` remains private. Public course thumbnails are allowed through a public bucket, while paid materials and payment proofs stay protected.
+
+## Sprint 3D Completed
+
+- [x] Added database row TypeScript types
+- [x] Added course row to catalog item mapper
+- [x] Added package row to package item mapper
+- [x] Added BDT price formatting helper
+- [x] Added mapper unit tests
+- [x] Exported database types and catalog mappers from data-access
+
+## Sprint 3D Notes
+
+The database uses snake_case columns, while Angular UI models use camelCase fields. Sprint 3D creates the first clean mapping layer so future Supabase queries can be connected without leaking database column names into UI components.
