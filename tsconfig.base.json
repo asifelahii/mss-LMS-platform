@@ -14,7 +14,19 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "strict": false,
-    "paths": {}
+    "paths": {
+      "@mss-platform/models": ["./libs/models/src/index.ts"],
+      "@mss-platform/utils": ["./libs/utils/src/index.ts"],
+      "@mss-platform/ui": ["./libs/ui/src/index.ts"],
+      "@mss-platform/auth": ["./libs/auth/src/index.ts"],
+      "@mss-platform/data-access": ["./libs/data-access/src/index.ts"],
+      "@mss-platform/feature-public": ["./libs/feature-public/src/index.ts"],
+      "@mss-platform/feature-student": ["./libs/feature-student/src/index.ts"],
+      "@mss-platform/feature-teacher": ["./libs/feature-teacher/src/index.ts"],
+      "@mss-platform/feature-admin": ["./libs/feature-admin/src/index.ts"],
+      "@mss-platform/feature-payment": ["./libs/feature-payment/src/index.ts"],
+      "@mss-platform/feature-learning": ["./libs/feature-learning/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
