@@ -23,7 +23,7 @@ import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
           </div>
 
           <div class="mss-course-detail__actions">
-            <a routerLink="/register" class="mss-primary-button">Enroll Now</a>
+            <a routerLink="/enroll" [queryParams]="{ course: selectedCourse.slug }" class="mss-primary-button">Enroll Now</a>
             <a routerLink="/packages" class="mss-secondary-button">View Packages</a>
           </div>
         </div>
@@ -110,7 +110,7 @@ import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
             <li>Submit sender number, TXN ID, and proof</li>
             <li>Admin verifies and unlocks access</li>
           </ol>
-          <a routerLink="/register" class="mss-primary-button">Start Enrollment</a>
+          <a routerLink="/enroll" [queryParams]="{ course: selectedCourse.slug }" class="mss-primary-button">Start Enrollment</a>
         </article>
       </section>
     } @else {
@@ -193,3 +193,4 @@ export class CourseDetailPageComponent {
     ];
   }
 }
+

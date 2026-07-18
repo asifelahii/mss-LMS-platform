@@ -20,7 +20,7 @@ import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
 
         <div class="mss-hero-actions">
           <a routerLink="/courses" class="mss-primary-button">Explore Courses</a>
-          <a routerLink="/register" class="mss-secondary-button">Enroll Now</a>
+          <a routerLink="/enroll" class="mss-secondary-button">Enroll Now</a>
         </div>
       </div>
 
@@ -95,7 +95,7 @@ import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
           guardian/contact information, bKash/Nagad/Rocket transaction ID, and manual approval.
         </p>
       </div>
-      <a routerLink="/register" class="mss-primary-button">Create Student Account</a>
+      <a routerLink="/enroll" class="mss-primary-button">Start Enrollment</a>
     </section>
   `,
 })

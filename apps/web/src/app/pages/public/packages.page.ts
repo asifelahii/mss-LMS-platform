@@ -47,7 +47,7 @@ import { COURSE_PACKAGES } from '../../data/course-packages.data';
             }
           </ul>
 
-          <a routerLink="/register" class="mss-primary-button mss-full-button">
+          <a routerLink="/enroll" [queryParams]="{ package: coursePackage.slug }" class="mss-primary-button mss-full-button">
             {{ coursePackage.ctaLabel }}
           </a>
         </article>
@@ -77,3 +77,4 @@ import { COURSE_PACKAGES } from '../../data/course-packages.data';
 export class PackagesPageComponent {
   protected readonly packages = COURSE_PACKAGES;
 }
+

@@ -9,6 +9,7 @@ import { RegisterPageComponent } from './pages/auth/register.page';
 import { AdminDashboardPageComponent } from './pages/admin/admin-dashboard.page';
 import { CourseCatalogPageComponent } from './pages/public/course-catalog.page';
 import { CourseDetailPageComponent } from './pages/public/course-detail.page';
+import { EnrollPageComponent } from './pages/public/enroll.page';
 import { PackagesPageComponent } from './pages/public/packages.page';
 import { PublicHomePageComponent } from './pages/public/public-home.page';
 import { StudentDashboardPageComponent } from './pages/student/student-dashboard.page';
@@ -38,6 +39,11 @@ export const routes: Routes = [
         path: 'packages',
         component: PackagesPageComponent,
         title: 'Packages | MSS',
+      },
+      {
+        path: 'enroll',
+        component: EnrollPageComponent,
+        title: 'Enroll | MSS',
       },
       {
         path: 'login',

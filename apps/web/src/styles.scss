@@ -1080,3 +1080,215 @@ a {
 .mss-check-list span::before {
   content: '\2713';
 }
+
+.mss-enroll-hero,
+.mss-enroll-shell {
+  margin-inline: auto;
+  width: min(100% - 2rem, 96rem);
+}
+
+.mss-enroll-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+  gap: 2rem;
+  padding-block: clamp(2rem, 5vw, 4rem);
+}
+
+.mss-enroll-hero h1 {
+  margin: 0;
+  color: var(--mss-text);
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  letter-spacing: -0.05em;
+}
+
+.mss-enroll-hero p,
+.mss-enroll-context-card p,
+.mss-enroll-help-card p {
+  color: var(--mss-muted);
+  line-height: 1.7;
+}
+
+.mss-enroll-context-card,
+.mss-enroll-form,
+.mss-enroll-help-card {
+  border: 1px solid var(--mss-border);
+  border-radius: 1.6rem;
+  background: #ffffff;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.mss-enroll-context-card {
+  align-self: start;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.mss-enroll-context-card span {
+  color: var(--mss-muted);
+  font-weight: 800;
+}
+
+.mss-enroll-context-card strong {
+  color: var(--mss-primary-dark);
+  font-size: 1.4rem;
+  line-height: 1.25;
+}
+
+.mss-enroll-context-card b {
+  color: var(--mss-accent);
+  font-size: 1.5rem;
+}
+
+.mss-enroll-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 26rem);
+  gap: 1.5rem;
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.mss-enroll-form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.mss-form-section-heading {
+  display: grid;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.mss-form-section-heading h2 {
+  margin: 0;
+  color: var(--mss-text);
+  letter-spacing: -0.035em;
+}
+
+.mss-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.mss-enroll-form label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--mss-text);
+  font-weight: 800;
+}
+
+.mss-enroll-form input,
+.mss-enroll-form select,
+.mss-enroll-form textarea {
+  width: 100%;
+  border: 1px solid var(--mss-border);
+  border-radius: 1rem;
+  background: #ffffff;
+  color: var(--mss-text);
+  padding: 0.85rem 1rem;
+  font: inherit;
+  outline: none;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.mss-enroll-form input:focus,
+.mss-enroll-form select:focus,
+.mss-enroll-form textarea:focus {
+  border-color: var(--mss-primary);
+  box-shadow: 0 0 0 4px rgba(15, 76, 129, 0.08);
+}
+
+.mss-span-2 {
+  grid-column: span 2;
+}
+
+.mss-payment-methods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.mss-payment-methods label {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid var(--mss-border);
+  border-radius: 999px;
+  background: var(--mss-surface-soft);
+  padding: 0.75rem 1rem;
+}
+
+.mss-payment-methods input {
+  width: auto;
+}
+
+.mss-upload-placeholder {
+  border: 1px dashed rgba(15, 76, 129, 0.32);
+  border-radius: 1.25rem;
+  background: var(--mss-surface-soft);
+  padding: 1rem;
+}
+
+.mss-upload-placeholder strong {
+  display: block;
+  color: var(--mss-primary-dark);
+}
+
+.mss-upload-placeholder p {
+  margin-bottom: 0;
+  color: var(--mss-muted);
+}
+
+.mss-enroll-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.mss-enroll-help-card {
+  align-self: start;
+  position: sticky;
+  top: 1rem;
+}
+
+.mss-enroll-help-card h2 {
+  margin: 0;
+  color: var(--mss-text);
+  letter-spacing: -0.035em;
+}
+
+.mss-enroll-help-card ol {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  padding-left: 1.2rem;
+  color: var(--mss-muted);
+  font-weight: 700;
+}
+
+.mss-enroll-note {
+  border-radius: 1.2rem;
+  background: var(--mss-surface-soft);
+  padding: 1rem;
+}
+
+.mss-enroll-note strong {
+  color: var(--mss-primary-dark);
+}
+
+@media (max-width: 900px) {
+  .mss-enroll-hero,
+  .mss-enroll-shell,
+  .mss-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mss-span-2 {
+    grid-column: span 1;
+  }
+
+  .mss-enroll-help-card {
+    position: static;
+  }
+}

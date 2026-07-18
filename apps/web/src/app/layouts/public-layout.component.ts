@@ -20,7 +20,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
           <a routerLink="/courses" routerLinkActive="active">Courses</a>
           <a routerLink="/packages" routerLinkActive="active">Packages</a>
           <a routerLink="/login" routerLinkActive="active">Login</a>
-          <a routerLink="/register" class="mss-nav-cta">Enroll Now</a>
+          <a routerLink="/enroll" routerLinkActive="active" class="mss-nav-cta">Enroll Now</a>
         </nav>
       </header>
 
