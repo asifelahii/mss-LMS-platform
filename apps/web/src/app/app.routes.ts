@@ -2,58 +2,53 @@ import { Routes } from '@angular/router';
 
 import { authGuard, guestGuard, roleGuard } from '@mss-platform/auth';
 
-import { DashboardLayoutComponent } from './layouts/dashboard-layout.component';
-import { PublicLayoutComponent } from './layouts/public-layout.component';
-import { LoginPageComponent } from './pages/auth/login.page';
-import { RegisterPageComponent } from './pages/auth/register.page';
-import { AdminDashboardPageComponent } from './pages/admin/admin-dashboard.page';
-import { CourseCatalogPageComponent } from './pages/public/course-catalog.page';
-import { CourseDetailPageComponent } from './pages/public/course-detail.page';
-import { EnrollPageComponent } from './pages/public/enroll.page';
-import { PackagesPageComponent } from './pages/public/packages.page';
-import { PublicHomePageComponent } from './pages/public/public-home.page';
-import { StudentDashboardPageComponent } from './pages/student/student-dashboard.page';
-import { TeacherDashboardPageComponent } from './pages/teacher/teacher-dashboard.page';
-
 export const routes: Routes = [
   {
     path: '',
-    component: PublicLayoutComponent,
+    loadComponent: () =>
+      import('./layouts/public-layout.component').then((m) => m.PublicLayoutComponent),
     children: [
       {
         path: '',
-        component: PublicHomePageComponent,
+        loadComponent: () =>
+          import('./pages/public/public-home.page').then((m) => m.PublicHomePageComponent),
         title: 'MSS | Math & Science Seekers',
       },
       {
         path: 'courses',
-        component: CourseCatalogPageComponent,
+        loadComponent: () =>
+          import('./pages/public/course-catalog.page').then((m) => m.CourseCatalogPageComponent),
         title: 'Courses | MSS',
       },
       {
         path: 'courses/:slug',
-        component: CourseDetailPageComponent,
+        loadComponent: () =>
+          import('./pages/public/course-detail.page').then((m) => m.CourseDetailPageComponent),
         title: 'Course Details | MSS',
       },
       {
         path: 'packages',
-        component: PackagesPageComponent,
+        loadComponent: () =>
+          import('./pages/public/packages.page').then((m) => m.PackagesPageComponent),
         title: 'Packages | MSS',
       },
       {
         path: 'enroll',
-        component: EnrollPageComponent,
+        loadComponent: () =>
+          import('./pages/public/enroll.page').then((m) => m.EnrollPageComponent),
         title: 'Enroll | MSS',
       },
       {
         path: 'login',
-        component: LoginPageComponent,
+        loadComponent: () =>
+          import('./pages/auth/login.page').then((m) => m.LoginPageComponent),
         canActivate: [guestGuard],
         title: 'Login | MSS',
       },
       {
         path: 'register',
-        component: RegisterPageComponent,
+        loadComponent: () =>
+          import('./pages/auth/register.page').then((m) => m.RegisterPageComponent),
         canActivate: [guestGuard],
         title: 'Register | MSS',
       },
@@ -61,7 +56,8 @@ export const routes: Routes = [
   },
   {
     path: 'student',
-    component: DashboardLayoutComponent,
+    loadComponent: () =>
+      import('./layouts/dashboard-layout.component').then((m) => m.DashboardLayoutComponent),
     canActivate: [authGuard, roleGuard(['student', 'admin', 'super_admin'])],
     data: {
       portal: 'student',
@@ -69,14 +65,18 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: StudentDashboardPageComponent,
+        loadComponent: () =>
+          import('./pages/student/student-dashboard.page').then(
+            (m) => m.StudentDashboardPageComponent
+          ),
         title: 'Student Dashboard | MSS',
       },
     ],
   },
   {
     path: 'teacher',
-    component: DashboardLayoutComponent,
+    loadComponent: () =>
+      import('./layouts/dashboard-layout.component').then((m) => m.DashboardLayoutComponent),
     canActivate: [authGuard, roleGuard(['teacher', 'admin', 'super_admin'])],
     data: {
       portal: 'teacher',
@@ -84,14 +84,18 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: TeacherDashboardPageComponent,
+        loadComponent: () =>
+          import('./pages/teacher/teacher-dashboard.page').then(
+            (m) => m.TeacherDashboardPageComponent
+          ),
         title: 'Teacher Dashboard | MSS',
       },
     ],
   },
   {
     path: 'admin',
-    component: DashboardLayoutComponent,
+    loadComponent: () =>
+      import('./layouts/dashboard-layout.component').then((m) => m.DashboardLayoutComponent),
     canActivate: [authGuard, roleGuard(['admin', 'super_admin'])],
     data: {
       portal: 'admin',
@@ -99,7 +103,8 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: AdminDashboardPageComponent,
+        loadComponent: () =>
+          import('./pages/admin/admin-dashboard.page').then((m) => m.AdminDashboardPageComponent),
         title: 'Admin Dashboard | MSS',
       },
     ],
