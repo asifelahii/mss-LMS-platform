@@ -6,3 +6,4 @@ export * from './lib/enrollment.model';
 export * from './lib/payment.model';
 export * from './lib/learning.model';
 export * from './lib/operations.model';
+export * from './lib/storage.model';

@@ -57,3 +57,20 @@ Mock frontend data remains unchanged for now.
 The first schema draft allowed all published lesson materials to be publicly selectable. Sprint 3B tightens this by requiring either staff access or active enrollment-based course access.
 
 Seed data mirrors the current mock frontend catalog so the UI can later be switched from static arrays to Supabase queries without changing the product content structure.
+
+## Sprint 3C Completed
+
+- [x] Added storage policy migration
+- [x] Defined `course-thumbnails` storage policy foundation
+- [x] Defined `lesson-materials` storage policy foundation
+- [x] Defined `payment-proofs` storage policy foundation
+- [x] Defined `profile-avatars` storage policy foundation
+- [x] Added storage bucket setup documentation
+- [x] Added shared storage bucket constants
+- [x] Added shared user-folder path helper
+
+## Sprint 3C Notes
+
+Bucket creation itself should be done through Supabase Dashboard, API, or supported tooling. The project migration defines access policies on `storage.objects`.
+
+`lesson-materials` remains private. Public course thumbnails are allowed through a public bucket, while paid materials and payment proofs stay protected.
