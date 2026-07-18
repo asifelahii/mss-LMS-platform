@@ -45,3 +45,18 @@ Thumbs.db
 .claude/settings.local.json
 
 .angular
+
+# MSS local env
+.env
+.env.*
+!.env.example
+
+# Supabase local temp/runtime
+supabase/.branches/
+supabase/.temp/
+
+# Local tool outputs
+tmp/
+coverage/
+.nx/cache/
+.angular/cache/
