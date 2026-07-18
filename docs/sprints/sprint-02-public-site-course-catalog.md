@@ -2,25 +2,56 @@
 
 ## Goal
 
-TBD
+Build the public MSS course-selling website foundation with course catalog, packages, course details, and enrollment checkout skeleton.
 
-## Scope
+## Completed
 
-- TBD
+- [x] Added public course catalog model
+- [x] Added reusable course card component
+- [x] Added mock course data
+- [x] Added /courses catalog page
+- [x] Added course filtering and search skeleton
+- [x] Added /courses/:slug course detail page
+- [x] Added course detail learning outcomes
+- [x] Added course content preview section
+- [x] Added teacher and enrollment process cards
+- [x] Added course package model
+- [x] Added package mock data
+- [x] Added /packages pricing/package page
+- [x] Added enrollment flow preview
+- [x] Added /enroll checkout/enrollment skeleton
+- [x] Added student information form skeleton
+- [x] Added guardian/contact fields
+- [x] Added bKash/Nagad/Rocket payment method skeleton
+- [x] Added transaction ID and payment note fields
+- [x] Added payment proof upload placeholder
+- [x] Updated navbar public links
+- [x] Updated homepage with featured courses, stats, and role-based feature sections
+- [x] Fixed Unicode encoding issues for taka symbol and check icons
+- [x] Added hover and interaction polish
+- [x] Verified public pages visually
+- [x] Verified production build
 
-## Tasks
+## Public Routes
 
-- [ ] TBD
-
-## Acceptance Criteria
-
-- [ ] Feature works correctly
-- [ ] Code follows DRY and SOLID principles
-- [ ] UI is responsive
-- [ ] Role/security rules are respected
-- [ ] Tested manually
-- [ ] Notes added for resume/showcase if relevant
+- /
+- /courses
+- /courses/:slug
+- /packages
+- /enroll
+- /login
+- /register
 
 ## Notes
 
-TBD
+Course, package, and enrollment data are currently static/mock data. This is intentional for Sprint 2. Real dynamic data will be connected after Supabase schema, RLS, admin course management, and teacher content management are implemented.
+
+## Acceptance Criteria
+
+- [x] Public homepage loads correctly
+- [x] Course catalog loads correctly
+- [x] Course detail pages load correctly
+- [x] Packages page loads correctly
+- [x] Enrollment page loads correctly
+- [x] Public CTAs route to the correct pages
+- [x] App builds successfully
