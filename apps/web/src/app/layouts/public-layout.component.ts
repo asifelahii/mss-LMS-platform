@@ -7,12 +7,12 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   template: `
     <div class="mss-public-shell">
       <header class="mss-public-header">
-        <a routerLink="/" class="mss-brand">
-          <span class="mss-brand-mark">M</span>
-          <span>
-            <strong>MSS</strong>
-            <small>Math & Science Seekers</small>
-          </span>
+        <a routerLink="/" class="mss-brand" aria-label="MSS - Math and Science Seekers home">
+          <img
+            src="/brand/mss-logo-navbar-240w.png"
+            alt="MSS - Math and Science Seekers"
+            class="mss-brand-logo"
+          />
         </a>
 
         <nav class="mss-public-nav" aria-label="Public navigation">

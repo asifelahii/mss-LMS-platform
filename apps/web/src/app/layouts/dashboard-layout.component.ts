@@ -7,8 +7,12 @@ import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@ang
   template: `
     <div class="mss-dashboard-shell">
       <aside class="mss-sidebar">
-        <a routerLink="/" class="mss-dashboard-brand">
-          <span class="mss-brand-mark">M</span>
+        <a routerLink="/" class="mss-dashboard-brand" aria-label="MSS - Math and Science Seekers home">
+          <img
+            src="/brand/mss-logo-square-64.png"
+            alt="MSS"
+            class="mss-dashboard-logo"
+          />
           <span>
             <strong>MSS</strong>
             <small>{{ portalTitle() }}</small>

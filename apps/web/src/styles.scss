@@ -275,3 +275,161 @@ a {
     min-height: auto;
   }
 }
+
+.mss-auth-grid {
+  display: grid;
+  width: min(100%, 68rem);
+  grid-template-columns: minmax(0, 0.95fr) minmax(20rem, 1.05fr);
+  gap: 1.5rem;
+}
+
+.mss-auth-intro {
+  align-self: stretch;
+  border: 1px solid var(--mss-border);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.16), transparent 34rem),
+    var(--mss-primary-dark);
+  color: #ffffff;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.mss-auth-intro h2 {
+  margin: 0.75rem 0 1rem;
+  font-size: clamp(2rem, 4vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.mss-auth-intro p {
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.7;
+}
+
+.mss-auth-intro .mss-eyebrow {
+  color: #7dd3fc;
+}
+
+.mss-auth-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.mss-auth-highlights span {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.55rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.mss-muted-text {
+  color: var(--mss-muted);
+  line-height: 1.6;
+}
+
+.mss-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.mss-form label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--mss-text);
+  font-weight: 700;
+}
+
+.mss-form input {
+  width: 100%;
+  border: 1px solid var(--mss-border);
+  border-radius: 1rem;
+  background: #ffffff;
+  color: var(--mss-text);
+  padding: 0.85rem 1rem;
+  font: inherit;
+  outline: none;
+}
+
+.mss-form input:focus {
+  border-color: var(--mss-primary);
+  box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.12);
+}
+
+.mss-form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mss-inline-check {
+  display: flex !important;
+  grid-template-columns: unset !important;
+  align-items: center;
+  gap: 0.55rem !important;
+  color: var(--mss-muted) !important;
+  font-weight: 600 !important;
+}
+
+.mss-inline-check input {
+  width: auto;
+}
+
+.mss-full-button {
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.mss-form-message {
+  border: 1px solid rgba(183, 121, 31, 0.22);
+  border-radius: 1rem;
+  background: rgba(183, 121, 31, 0.08);
+  color: var(--mss-warning);
+  padding: 0.8rem 1rem;
+  font-weight: 700;
+}
+
+.mss-auth-switch {
+  margin-top: 1.25rem;
+  color: var(--mss-muted);
+  text-align: center;
+}
+
+.mss-auth-switch a {
+  color: var(--mss-primary);
+  font-weight: 800;
+}
+
+@media (max-width: 860px) {
+  .mss-auth-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mss-brand-logo {
+  display: block;
+  width: 9.5rem;
+  height: auto;
+}
+
+.mss-dashboard-logo {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  object-fit: contain;
+}
+
+@media (max-width: 760px) {
+  .mss-brand-logo {
+    width: 8rem;
+  }
+}
