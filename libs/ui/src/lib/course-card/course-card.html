@@ -1,0 +1,50 @@
+<article class="course-card">
+  <a [routerLink]="['/courses', course.slug]" class="course-card__media" aria-label="View course details">
+    @if (course.thumbnailUrl) {
+      <img [src]="course.thumbnailUrl" [alt]="course.title" />
+    } @else {
+      <div class="course-card__placeholder">
+        <span>{{ course.subject }}</span>
+      </div>
+    }
+
+    <span class="course-card__mode">{{ course.mode }}</span>
+  </a>
+
+  <div class="course-card__body">
+    <div class="course-card__meta">
+      <span>{{ course.academicLevel }}</span>
+      <span>{{ course.subject }}</span>
+    </div>
+
+    <h3>
+      <a [routerLink]="['/courses', course.slug]">{{ course.title }}</a>
+    </h3>
+
+    <p>{{ course.subtitle }}</p>
+
+    <div class="course-card__teacher">
+      <span>Teacher</span>
+      <strong>{{ course.teacherName }}</strong>
+    </div>
+
+    <div class="course-card__stats">
+      <span>{{ course.totalLessons }} lessons</span>
+      <span>{{ course.totalQuizzes }} quizzes</span>
+      <span>{{ course.durationLabel }}</span>
+    </div>
+
+    <div class="course-card__footer">
+      <div>
+        @if (course.discountedPriceLabel) {
+          <span class="course-card__price-muted">{{ course.priceLabel }}</span>
+          <strong>{{ course.discountedPriceLabel }}</strong>
+        } @else {
+          <strong>{{ course.priceLabel }}</strong>
+        }
+      </div>
+
+      <a [routerLink]="['/courses', course.slug]" class="course-card__cta">Details</a>
+    </div>
+  </div>
+</article>
