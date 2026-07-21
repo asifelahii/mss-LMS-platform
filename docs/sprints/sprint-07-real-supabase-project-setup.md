@@ -121,3 +121,26 @@ Bucket visibility:
 - lesson-materials: private
 - payment-proofs: private
 - profile-avatars: private
+
+## Sprint 7E Completed
+
+- [x] Added local-only Angular environment support
+- [x] Confirmed environment.local.ts is ignored by Git
+- [x] Added real Supabase project URL and anon key locally
+- [x] Fixed Supabase URL format by removing /rest/v1
+- [x] Confirmed real homepage/catalog data loads from Supabase
+- [x] Confirmed real course catalog loads from Supabase
+- [x] Confirmed real packages load from Supabase
+- [x] Confirmed enrollment dropdown loads Supabase courses/packages
+- [x] Confirmed demo fallback notice disappears after real config
+
+## Sprint 7E Notes
+
+Real Supabase frontend connection is now working.
+
+The first issue was using the REST endpoint URL:
+
+- Incorrect: https://zmmuenbfzgyxuvlhtpyg.supabase.co/rest/v1/
+- Correct: https://zmmuenbfzgyxuvlhtpyg.supabase.co
+
+After fixing the URL and restarting the Angular dev server, MSS public catalog, packages, and enrollment options loaded successfully from the remote Supabase project.
