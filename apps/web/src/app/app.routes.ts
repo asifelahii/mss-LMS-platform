@@ -79,7 +79,7 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./pages/student/student-dashboard.page').then(
+          import('./pages/student/student-dashboard/student-dashboard.page').then(
             (m) => m.StudentDashboardPageComponent
           ),
         title: 'Student Dashboard | MSS',
@@ -98,7 +98,7 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./pages/teacher/teacher-dashboard.page').then(
+          import('./pages/teacher/teacher-dashboard/teacher-dashboard.page').then(
             (m) => m.TeacherDashboardPageComponent
           ),
         title: 'Teacher Dashboard | MSS',
@@ -117,7 +117,7 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./pages/admin/admin-dashboard.page').then((m) => m.AdminDashboardPageComponent),
+          import('./pages/admin/admin-dashboard/admin-dashboard.page').then((m) => m.AdminDashboardPageComponent),
         title: 'Admin Dashboard | MSS',
       },
     ],
@@ -127,6 +127,7 @@ export const routes: Routes = [
     redirectTo: '',
   },
 ];
+
 
 
 

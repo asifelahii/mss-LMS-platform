@@ -96,3 +96,18 @@ This is a structure-only refactor. Course detail loading, enrollment option load
 ## Sprint 8B-3 Batch 3 Notes
 
 This is a structure-only refactor. Supabase login, registration, validation, and role redirect behavior should remain unchanged.
+
+## Sprint 8B-3 Batch 4 Completed
+
+- [x] Moved StudentDashboardPageComponent into a component-named folder
+- [x] Split student dashboard page into TS, HTML, and SCSS files
+- [x] Moved TeacherDashboardPageComponent into a component-named folder
+- [x] Split teacher dashboard page into TS, HTML, and SCSS files
+- [x] Moved AdminDashboardPageComponent into a component-named folder
+- [x] Split admin dashboard page into TS, HTML, and SCSS files
+- [x] Updated lazy route imports
+- [x] Removed old flat dashboard page files
+
+## Sprint 8B-3 Batch 4 Notes
+
+All current app page components now follow the component-named folder convention.
