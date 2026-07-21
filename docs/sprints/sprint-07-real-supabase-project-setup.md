@@ -49,3 +49,28 @@ Backend/admin-only work must use:
 - supabase/migrations/20260718204500_core_schema_and_rls.sql
 - supabase/migrations/20260718211500_access_policies_and_seed_data.sql
 - supabase/migrations/20260718213000_storage_policies.sql
+
+## Sprint 7B Completed
+
+- [x] Logged in to Supabase CLI
+- [x] Confirmed remote Supabase project
+- [x] Linked local repo to remote Supabase project
+- [x] Verified dry-run migration plan
+- [x] Pushed all 3 migrations to remote Supabase database
+- [x] Confirmed remote database push finished successfully
+
+## Sprint 7B Notes
+
+Remote project:
+
+- Project name: mss-portal
+- Project ref: zmmuenbfzgyxuvlhtpyg
+- Region: Southeast Asia (Singapore)
+
+Pushed migrations:
+
+- 20260718204500_core_schema_and_rls.sql
+- 20260718211500_access_policies_and_seed_data.sql
+- 20260718213000_storage_policies.sql
+
+The CLI showed a Docker-related cache warning after the push. This did not block the remote migration push because the command finished successfully.
