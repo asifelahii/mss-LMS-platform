@@ -70,3 +70,16 @@ Inline templates should be avoided except for very small temporary components.
 ## Sprint 8B-3 Notes
 
 This is a structure-only refactor. Public course, package, and homepage Supabase loading behavior should remain unchanged.
+
+## Sprint 8B-3 Batch 2 Completed
+
+- [x] Moved CourseDetailPageComponent into a component-named folder
+- [x] Split course detail page into TS, HTML, and SCSS files
+- [x] Moved EnrollPageComponent into a component-named folder
+- [x] Split enrollment page into TS, HTML, and SCSS files
+- [x] Updated lazy route imports
+- [x] Removed old flat course detail and enrollment files
+
+## Sprint 8B-3 Batch 2 Notes
+
+This is a structure-only refactor. Course detail loading, enrollment option loading, and pending enrollment submission behavior should remain unchanged.

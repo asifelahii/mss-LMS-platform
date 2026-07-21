@@ -1,0 +1,190 @@
+<section class="mss-enroll-hero">
+  <div>
+    <p class="mss-eyebrow">Enrollment</p>
+    <h1>Submit your course enrollment request.</h1>
+    <p>
+      Submit your selected course/package and manual MFS payment details.
+      When Supabase is configured, this creates a pending enrollment and payment
+      request for admin verification.
+    </p>
+  </div>
+
+  <aside class="mss-enroll-context-card">
+    <span>Selected item</span>
+    <strong>{{ selectedContext().title }}</strong>
+    <p>{{ selectedContext().subtitle }}</p>
+    <b>{{ selectedContext().priceLabel }}</b>
+  </aside>
+</section>
+
+@if (dataNotice()) {
+  <section class="mss-page-section">
+    <p class="mss-form-message">{{ dataNotice() }}</p>
+  </section>
+}
+
+<section class="mss-enroll-shell">
+  <form class="mss-enroll-form" [formGroup]="enrollmentForm" (ngSubmit)="submitEnrollment()">
+    <div class="mss-form-section-heading">
+      <p class="mss-eyebrow">Student Information</p>
+      <h2>Basic details</h2>
+    </div>
+
+    <div class="mss-form-grid">
+      <label>
+        Full name
+        <input formControlName="fullName" type="text" placeholder="Enter student full name" />
+      </label>
+
+      <label>
+        Academic level
+        <select formControlName="classLevel">
+          <option value="Honours 1st Year">Honours 1st Year</option>
+          <option value="Honours 2nd Year">Honours 2nd Year</option>
+          <option value="Honours 3rd Year">Honours 3rd Year</option>
+          <option value="Honours 4th Year">Honours 4th Year</option>
+          <option value="Open Demo">Open Demo</option>
+        </select>
+      </label>
+
+      <label>
+        Institution name
+        <input formControlName="institutionName" type="text" placeholder="College/university name" />
+      </label>
+
+      <label>
+        Address
+        <input formControlName="address" type="text" placeholder="District / area" />
+      </label>
+
+      <label>
+        Student phone
+        <input formControlName="studentPhone" type="tel" placeholder="01XXXXXXXXX" />
+      </label>
+
+      <label>
+        Guardian phone
+        <input formControlName="guardianPhone" type="tel" placeholder="01XXXXXXXXX" />
+      </label>
+
+      <label class="mss-span-2">
+        Email address
+        <input formControlName="email" type="email" placeholder="Optional email address" />
+      </label>
+    </div>
+
+    <div class="mss-form-section-heading">
+      <p class="mss-eyebrow">Course Selection</p>
+      <h2>Choose course or package</h2>
+    </div>
+
+    @if (isLoadingOptions()) {
+      <p class="mss-form-message">Loading course and package options...</p>
+    }
+
+    <label>
+      Selected course/package
+      <select formControlName="selectedCourseOrPackage" (change)="syncSelectedValue()">
+        <option value="">Select one</option>
+
+        <optgroup label="Courses">
+          @for (course of courses(); track course.id) {
+            <option [value]="'course:' + course.id">
+              {{ course.title }} - {{ course.discountedPriceLabel || course.priceLabel }}
+            </option>
+          }
+        </optgroup>
+
+        <optgroup label="Packages">
+          @for (coursePackage of packages(); track coursePackage.id) {
+            <option [value]="'package:' + coursePackage.id">
+              {{ coursePackage.title }} - {{ coursePackage.discountedPriceLabel || coursePackage.priceLabel }}
+            </option>
+          }
+        </optgroup>
+      </select>
+    </label>
+
+    <div class="mss-form-section-heading">
+      <p class="mss-eyebrow">Payment Information</p>
+      <h2>Manual MFS verification</h2>
+    </div>
+
+    <div class="mss-payment-methods">
+      <label>
+        <input formControlName="paymentMethod" type="radio" value="bkash" />
+        bKash
+      </label>
+
+      <label>
+        <input formControlName="paymentMethod" type="radio" value="nagad" />
+        Nagad
+      </label>
+
+      <label>
+        <input formControlName="paymentMethod" type="radio" value="rocket" />
+        Rocket
+      </label>
+    </div>
+
+    <div class="mss-form-grid">
+      <label>
+        Sender number
+        <input formControlName="senderNumber" type="tel" placeholder="Number used for payment" />
+      </label>
+
+      <label>
+        Transaction ID
+        <input formControlName="transactionId" type="text" placeholder="Example: 9AB123XYZ" />
+      </label>
+
+      <label class="mss-span-2">
+        Payment note
+        <textarea
+          formControlName="paymentNote"
+          rows="4"
+          placeholder="Optional note for admin"
+        ></textarea>
+      </label>
+    </div>
+
+    <div class="mss-upload-placeholder">
+      <strong>Payment proof upload</strong>
+      <p>
+        File upload will be connected later with Supabase Storage. For now,
+        submit sender number, transaction ID, and optional note.
+      </p>
+    </div>
+
+    @if (submittedMessage()) {
+      <p class="mss-form-message">{{ submittedMessage() }}</p>
+    }
+
+    <div class="mss-enroll-actions">
+      <button type="submit" class="mss-primary-button" [disabled]="isSubmitting()">
+        {{ isSubmitting() ? 'Submitting...' : 'Submit Enrollment Request' }}
+      </button>
+      <a routerLink="/courses" class="mss-secondary-button">Back to Courses</a>
+    </div>
+  </form>
+
+  <aside class="mss-enroll-help-card">
+    <p class="mss-eyebrow">How approval will work</p>
+    <h2>Admin verifies before access unlocks.</h2>
+
+    <ol>
+      <li>Student submits enrollment request.</li>
+      <li>Admin checks payment number and transaction ID.</li>
+      <li>Admin approves or rejects the payment request.</li>
+      <li>Approved students get course access in dashboard.</li>
+    </ol>
+
+    <div class="mss-enroll-note">
+      <strong>Real backend rule</strong>
+      <p>
+        Real enrollment requires a logged-in student profile. Without Supabase
+        credentials, this page stays in safe demo-preview mode.
+      </p>
+    </div>
+  </aside>
+</section>

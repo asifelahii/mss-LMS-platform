@@ -36,7 +36,7 @@ export const routes: Routes = [
       {
         path: 'courses/:slug',
         loadComponent: () =>
-          import('./pages/public/course-detail.page').then((m) => m.CourseDetailPageComponent),
+          import('./pages/public/course-detail/course-detail.page').then((m) => m.CourseDetailPageComponent),
         title: 'Course Details | MSS',
       },
       {
@@ -48,7 +48,7 @@ export const routes: Routes = [
       {
         path: 'enroll',
         loadComponent: () =>
-          import('./pages/public/enroll.page').then((m) => m.EnrollPageComponent),
+          import('./pages/public/enroll/enroll.page').then((m) => m.EnrollPageComponent),
         title: 'Enroll | MSS',
       },
       {
@@ -127,5 +127,6 @@ export const routes: Routes = [
     redirectTo: '',
   },
 ];
+
 
 

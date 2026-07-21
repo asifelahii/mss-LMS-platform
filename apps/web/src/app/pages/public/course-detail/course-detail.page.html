@@ -1,0 +1,123 @@
+@if (isLoading()) {
+  <section class="mss-page-section">
+    <p class="mss-eyebrow">Loading Course</p>
+    <h1>Preparing course details...</h1>
+    <p>Please wait while MSS loads the latest course information.</p>
+  </section>
+} @else if (course(); as selectedCourse) {
+  @if (dataNotice()) {
+    <section class="mss-page-section">
+      <p class="mss-form-message">{{ dataNotice() }}</p>
+    </section>
+  }
+
+  <section class="mss-course-detail">
+    <div>
+      <p class="mss-eyebrow">{{ selectedCourse.academicLevel }}</p>
+      <h1>{{ selectedCourse.title }}</h1>
+      <p>{{ selectedCourse.subtitle }}</p>
+
+      <div class="mss-course-detail__tags">
+        @for (tag of selectedCourse.tags; track tag) {
+          <span>{{ tag }}</span>
+        }
+      </div>
+
+      <div class="mss-course-detail__actions">
+        <a routerLink="/enroll" [queryParams]="{ course: selectedCourse.slug }" class="mss-primary-button">Enroll Now</a>
+        <a routerLink="/packages" class="mss-secondary-button">View Packages</a>
+      </div>
+    </div>
+
+    <aside class="mss-course-detail__card">
+      <p>Course price</p>
+      @if (selectedCourse.discountedPriceLabel) {
+        <span class="mss-price-old">{{ selectedCourse.priceLabel }}</span>
+        <strong>{{ selectedCourse.discountedPriceLabel }}</strong>
+      } @else {
+        <strong>{{ selectedCourse.priceLabel }}</strong>
+      }
+
+      <ul>
+        <li>{{ selectedCourse.totalLessons }} lessons</li>
+        <li>{{ selectedCourse.totalQuizzes }} quizzes/tests</li>
+        <li>{{ selectedCourse.durationLabel }} planned duration</li>
+        <li>{{ selectedCourse.mode }} learning mode</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section class="mss-detail-grid">
+    <article class="mss-detail-panel">
+      <p class="mss-eyebrow">What you will learn</p>
+      <h2>Structured learning outcomes</h2>
+      <div class="mss-check-list">
+        @for (outcome of learningOutcomes(selectedCourse); track outcome) {
+          <span>{{ outcome }}</span>
+        }
+      </div>
+    </article>
+
+    <article class="mss-detail-panel">
+      <p class="mss-eyebrow">Course support</p>
+      <h2>Included with enrollment</h2>
+      <div class="mss-check-list">
+        <span>Chapter-wise recorded lessons</span>
+        <span>PDF notes and study materials</span>
+        <span>Quiz and model-test practice</span>
+        <span>Payment-based protected access</span>
+        <span>Support ticket for payment or access issues</span>
+      </div>
+    </article>
+  </section>
+
+  <section class="mss-content-preview">
+    <div>
+      <p class="mss-eyebrow">Course Content Preview</p>
+      <h2>Chapter-by-chapter learning path</h2>
+      <p>
+        Full chapter and lesson management will be controlled by teachers from the
+        teacher dashboard. Students will see unlocked lessons after enrollment approval.
+      </p>
+    </div>
+
+    <div class="mss-preview-list">
+      @for (chapter of previewChapters(selectedCourse); track chapter.title) {
+        <article>
+          <span>{{ chapter.label }}</span>
+          <strong>{{ chapter.title }}</strong>
+          <small>{{ chapter.summary }}</small>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="mss-teacher-enrollment-grid">
+    <article class="mss-teacher-card">
+      <p class="mss-eyebrow">Teacher</p>
+      <h2>{{ selectedCourse.teacherName }}</h2>
+      <p>
+        Teachers will manage assigned courses, lessons, materials, quizzes,
+        scheduled releases, and student progress from their dashboard.
+      </p>
+    </article>
+
+    <article class="mss-enroll-card">
+      <p class="mss-eyebrow">Enrollment Process</p>
+      <h2>Manual payment, admin-approved access.</h2>
+      <ol>
+        <li>Select course or package</li>
+        <li>Pay through bKash, Nagad, or Rocket</li>
+        <li>Submit sender number, TXN ID, and proof</li>
+        <li>Admin verifies and unlocks access</li>
+      </ol>
+      <a routerLink="/enroll" [queryParams]="{ course: selectedCourse.slug }" class="mss-primary-button">Start Enrollment</a>
+    </article>
+  </section>
+} @else {
+  <section class="mss-page-section">
+    <p class="mss-eyebrow">Course not found</p>
+    <h1>We could not find this course.</h1>
+    <a routerLink="/courses" class="mss-primary-button">Browse Courses</a>
+  </section>
+}
