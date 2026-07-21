@@ -1,74 +1,81 @@
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Component, computed, inject, signal } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+
+import { AuthStateService, SupabaseAuthService } from '@mss-platform/auth';
 
 @Component({
   selector: 'mss-dashboard-layout',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterOutlet],
   template: `
     <div class="mss-dashboard-shell">
-      <aside class="mss-sidebar">
-        <a routerLink="/" class="mss-dashboard-brand" aria-label="MSS - Math and Science Seekers home">
-          <img
-            src="/brand/mss-logo-square-64.png"
-            alt="MSS"
-            class="mss-dashboard-logo"
-          />
-          <span>
-            <strong>MSS</strong>
-            <small>{{ portalTitle() }}</small>
-          </span>
+      <aside class="mss-dashboard-sidebar">
+        <a routerLink="/" class="mss-dashboard-brand" aria-label="MSS home">
+          <img src="/brand/mss-logo-square-64.png" alt="MSS" class="mss-dashboard-logo" />
+          <span>MSS</span>
         </a>
 
-        <nav class="mss-sidebar-nav" aria-label="Dashboard navigation">
-          <a [routerLink]="basePath()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            Dashboard
-          </a>
-          <a [routerLink]="basePath() + '/courses'" routerLinkActive="active">Courses</a>
-          <a [routerLink]="basePath() + '/support'" routerLinkActive="active">Support</a>
-          <a [routerLink]="basePath() + '/profile'" routerLinkActive="active">Profile</a>
+        <div class="mss-dashboard-user">
+          <span>Signed in as</span>
+          <strong>{{ displayName() }}</strong>
+          <small>{{ roleLabel() }}</small>
+        </div>
+
+        <nav class="mss-dashboard-nav" aria-label="Dashboard navigation">
+          <a routerLink="/student">Student</a>
+          <a routerLink="/teacher">Teacher</a>
+          <a routerLink="/admin">Admin</a>
+          <a routerLink="/courses">Courses</a>
+          <a routerLink="/packages">Packages</a>
         </nav>
+
+        <button type="button" class="mss-dashboard-logout" (click)="logout()" [disabled]="isLoggingOut()">
+          {{ isLoggingOut() ? 'Logging out...' : 'Logout' }}
+        </button>
+
+        @if (message()) {
+          <p class="mss-dashboard-message">{{ message() }}</p>
+        }
       </aside>
 
-      <section class="mss-dashboard-main">
-        <header class="mss-dashboard-topbar">
-          <div>
-            <p class="mss-eyebrow">Sprint 1 Skeleton</p>
-            <h1>{{ portalTitle() }}</h1>
-          </div>
-          <a routerLink="/" class="mss-text-link">Back to site</a>
-        </header>
-
+      <section class="mss-dashboard-content">
         <router-outlet />
       </section>
     </div>
   `,
 })
 export class DashboardLayoutComponent {
-  private readonly route = inject(ActivatedRoute);
+  private readonly authState = inject(AuthStateService);
+  private readonly authService = inject(SupabaseAuthService);
+  private readonly router = inject(Router);
 
-  protected portal(): string {
-    return String(this.route.snapshot.data['portal'] ?? 'dashboard');
-  }
+  protected readonly isLoggingOut = signal(false);
+  protected readonly message = signal('');
 
-  protected basePath(): string {
-    return `/${this.portal()}`;
-  }
+  protected readonly displayName = computed(
+    () => this.authState.currentProfile()?.fullName ?? 'MSS User'
+  );
 
-  protected portalTitle(): string {
-    const portal = this.portal();
+  protected readonly roleLabel = computed(() => {
+    const role = this.authState.currentRole();
 
-    if (portal === 'student') {
-      return 'Student Portal';
+    if (!role) {
+      return 'No active role';
     }
 
-    if (portal === 'teacher') {
-      return 'Teacher Dashboard';
-    }
+    return role.replaceAll('_', ' ');
+  });
 
-    if (portal === 'admin') {
-      return 'Admin Dashboard';
-    }
+  protected async logout(): Promise<void> {
+    this.message.set('');
+    this.isLoggingOut.set(true);
 
-    return 'Dashboard';
+    try {
+      await this.authService.logout();
+      await this.router.navigateByUrl('/login');
+    } catch (error) {
+      this.message.set(error instanceof Error ? error.message : 'Logout failed. Please try again.');
+    } finally {
+      this.isLoggingOut.set(false);
+    }
   }
 }

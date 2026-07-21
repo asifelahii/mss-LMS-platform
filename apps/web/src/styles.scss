@@ -1292,3 +1292,121 @@ a {
     position: static;
   }
 }
+
+.mss-dashboard-user {
+  display: grid;
+  gap: 0.2rem;
+  border: 1px solid var(--mss-border);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 0.85rem;
+}
+
+.mss-dashboard-user span,
+.mss-dashboard-user small,
+.mss-dashboard-message {
+  color: var(--mss-muted);
+  font-size: 0.78rem;
+}
+
+.mss-dashboard-user strong {
+  color: var(--mss-primary-dark);
+  line-height: 1.25;
+}
+
+.mss-dashboard-user small {
+  text-transform: capitalize;
+}
+
+.mss-dashboard-logout {
+  width: 100%;
+  border: 1px solid rgba(185, 28, 28, 0.18);
+  border-radius: 999px;
+  background: rgba(185, 28, 28, 0.08);
+  color: #991b1b;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  font: inherit;
+  font-weight: 900;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.mss-dashboard-logout:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(185, 28, 28, 0.35);
+  background: rgba(185, 28, 28, 0.12);
+  box-shadow: 0 14px 28px rgba(15, 32, 43, 0.08);
+}
+
+.mss-dashboard-logout:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.mss-dashboard-message {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mss-dashboard-user {
+  display: grid;
+  gap: 0.2rem;
+  border: 1px solid var(--mss-border);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 0.85rem;
+}
+
+.mss-dashboard-user span,
+.mss-dashboard-user small,
+.mss-dashboard-message {
+  color: var(--mss-muted);
+  font-size: 0.78rem;
+}
+
+.mss-dashboard-user strong {
+  color: var(--mss-primary-dark);
+  line-height: 1.25;
+}
+
+.mss-dashboard-user small {
+  text-transform: capitalize;
+}
+
+.mss-dashboard-logout {
+  width: 100%;
+  border: 1px solid rgba(185, 28, 28, 0.18);
+  border-radius: 999px;
+  background: rgba(185, 28, 28, 0.08);
+  color: #991b1b;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  font: inherit;
+  font-weight: 900;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.mss-dashboard-logout:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(185, 28, 28, 0.35);
+  background: rgba(185, 28, 28, 0.12);
+  box-shadow: 0 14px 28px rgba(15, 32, 43, 0.08);
+}
+
+.mss-dashboard-logout:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.mss-dashboard-message {
+  margin: 0;
+  line-height: 1.5;
+}

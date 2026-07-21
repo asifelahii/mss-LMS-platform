@@ -37,3 +37,21 @@ The service creates a row in `profiles` after Supabase Auth signup. In a real Su
 Login and registration now call the real auth service. Without real Supabase URL and anon key, the forms will show a configuration error instead of crashing the app.
 
 Real end-to-end auth testing still requires a Supabase project, migrations, storage buckets, and email/auth settings to be configured.
+
+## Sprint 4C Completed
+
+- [x] Added role redirect utility
+- [x] Improved auth guard with current profile loading
+- [x] Improved guest guard with role redirect
+- [x] Improved role guard with Supabase profile fallback
+- [x] Added app startup profile bootstrap
+- [x] Added dashboard user identity display
+- [x] Added dashboard logout button
+- [x] Added dashboard logout error/loading state
+- [x] Added dashboard logout styles
+
+## Sprint 4C Notes
+
+Route guards still respect the environment flag. In development, guards can remain disabled while UI work continues. In production, guards will load the current Supabase profile and protect dashboards by role.
+
+The app root now tries to load the current Supabase profile at startup. If Supabase is not configured yet, the error is safely ignored for local UI development.

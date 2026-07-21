@@ -1,16 +1,12 @@
 import { UserRole } from '@mss-platform/models';
 
-export function getDefaultRouteForRole(role: UserRole | null): string {
-  if (role === 'super_admin' || role === 'admin') {
-    return '/admin';
-  }
-
+export function getRoleRedirectPath(role: UserRole | null): string {
   if (role === 'teacher') {
     return '/teacher';
   }
 
-  if (role === 'support') {
-    return '/admin/support';
+  if (role === 'admin' || role === 'super_admin' || role === 'support') {
+    return '/admin';
   }
 
   if (role === 'student') {

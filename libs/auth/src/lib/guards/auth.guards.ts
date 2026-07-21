@@ -5,58 +5,72 @@ import { UserRole } from '@mss-platform/models';
 
 import { AUTH_GUARD_CONFIG } from '../config/auth-guard.config';
 import { AuthStateService } from '../services/auth-state.service';
-import { getDefaultRouteForRole } from '../utils/role-redirect.util';
+import { SupabaseAuthService } from '../services/supabase-auth.service';
+import { getRoleRedirectPath } from '../utils/role-redirect.util';
 
-export const authGuard: CanActivateFn = () => {
-  const config = inject(AUTH_GUARD_CONFIG);
+async function resolveCurrentRole(): Promise<UserRole | null> {
   const authState = inject(AuthStateService);
+
+  if (authState.currentRole()) {
+    return authState.currentRole();
+  }
+
+  try {
+    const authService = inject(SupabaseAuthService);
+    const profile = await authService.loadCurrentProfile();
+
+    return profile?.role ?? null;
+  } catch {
+    authState.clearProfile();
+    return null;
+  }
+}
+
+export const authGuard: CanActivateFn = async () => {
+  const config = inject(AUTH_GUARD_CONFIG);
   const router = inject(Router);
 
   if (!config.enableRouteGuards) {
     return true;
   }
 
-  if (authState.isAuthenticated()) {
-    return true;
-  }
+  const role = await resolveCurrentRole();
 
-  return router.createUrlTree(['/login']);
+  return role ? true : router.createUrlTree(['/login']);
 };
 
-export const guestGuard: CanActivateFn = () => {
+export const guestGuard: CanActivateFn = async () => {
   const config = inject(AUTH_GUARD_CONFIG);
-  const authState = inject(AuthStateService);
   const router = inject(Router);
 
   if (!config.enableRouteGuards) {
     return true;
   }
 
-  if (!authState.isAuthenticated()) {
-    return true;
-  }
+  const role = await resolveCurrentRole();
 
-  return router.createUrlTree([getDefaultRouteForRole(authState.currentRole())]);
+  return role ? router.createUrlTree([getRoleRedirectPath(role)]) : true;
 };
 
 export function roleGuard(allowedRoles: UserRole[]): CanActivateFn {
-  return () => {
+  return async () => {
     const config = inject(AUTH_GUARD_CONFIG);
-    const authState = inject(AuthStateService);
     const router = inject(Router);
 
     if (!config.enableRouteGuards) {
       return true;
     }
 
-    if (!authState.isAuthenticated()) {
+    const role = await resolveCurrentRole();
+
+    if (!role) {
       return router.createUrlTree(['/login']);
     }
 
-    if (authState.hasAnyRole(allowedRoles)) {
+    if (allowedRoles.includes(role)) {
       return true;
     }
 
-    return router.createUrlTree([getDefaultRouteForRole(authState.currentRole())]);
+    return router.createUrlTree([getRoleRedirectPath(role)]);
   };
 }
