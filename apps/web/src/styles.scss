@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 html {
   @include mat.theme(
@@ -1410,3 +1411,390 @@ a {
   margin: 0;
   line-height: 1.5;
 }
+
+/* --------------------------------------------------------------------------
+   Sprint 8A: Professional course-selling polish + liquid glass foundation
+   -------------------------------------------------------------------------- */
+
+:root {
+  --mss-bg: #f3f7fb;
+  --mss-surface: #ffffff;
+  --mss-surface-soft: #edf7f8;
+  --mss-text: #122233;
+  --mss-muted: #607080;
+  --mss-border: rgba(18, 34, 51, 0.12);
+  --mss-primary: #0c4a6e;
+  --mss-primary-dark: #0b2239;
+  --mss-accent: #0f766e;
+  --mss-glass: rgba(255, 255, 255, 0.72);
+  --mss-glass-strong: rgba(255, 255, 255, 0.88);
+  --mss-glass-border: rgba(255, 255, 255, 0.72);
+  --mss-shadow-soft: 0 20px 60px rgba(15, 32, 43, 0.08);
+  --mss-shadow-lift: 0 28px 80px rgba(15, 32, 43, 0.14);
+  --mss-ring: rgba(12, 74, 110, 0.16);
+}
+
+body {
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(15, 118, 110, 0.14), transparent 26rem),
+    radial-gradient(circle at 92% 4%, rgba(12, 74, 110, 0.13), transparent 28rem),
+    linear-gradient(180deg, #f8fbff 0%, var(--mss-bg) 46%, #f7faf8 100%);
+  color: var(--mss-text);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Noto Sans Bengali",
+    "Nirmala UI",
+    Arial,
+    sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  background-image:
+    linear-gradient(rgba(12, 74, 110, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(12, 74, 110, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 72%);
+}
+
+.mss-public-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin: 0.75rem auto 0;
+  width: min(100% - 1.5rem, 96rem);
+  border: 1px solid var(--mss-glass-border);
+  border-radius: 1.35rem;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.58));
+  box-shadow: 0 18px 54px rgba(15, 32, 43, 0.08);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+}
+
+.mss-brand-logo {
+  filter: drop-shadow(0 10px 22px rgba(15, 32, 43, 0.08));
+}
+
+.mss-public-nav {
+  border: 1px solid rgba(18, 34, 51, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.54);
+  padding: 0.35rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.mss-public-nav a {
+  border-radius: 999px;
+  padding: 0.62rem 0.85rem;
+  color: rgba(18, 34, 51, 0.68);
+  font-size: 0.94rem;
+  font-weight: 750;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.mss-public-nav a:hover,
+.mss-public-nav a.active {
+  background: rgba(12, 74, 110, 0.08);
+  color: var(--mss-primary);
+}
+
+.mss-public-nav a:hover {
+  transform: translateY(-1px);
+}
+
+.mss-nav-cta,
+.mss-primary-button {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background:
+    linear-gradient(135deg, var(--mss-primary), var(--mss-primary-dark));
+  box-shadow:
+    0 14px 34px rgba(12, 74, 110, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+.mss-nav-cta:hover,
+.mss-primary-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 20px 44px rgba(12, 74, 110, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  filter: saturate(1.08);
+}
+
+.mss-secondary-button {
+  border-color: rgba(18, 34, 51, 0.1);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.62));
+  box-shadow:
+    0 12px 32px rgba(15, 32, 43, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.mss-secondary-button:hover {
+  transform: translateY(-2px);
+  border-color: rgba(12, 74, 110, 0.22);
+  box-shadow: 0 18px 44px rgba(15, 32, 43, 0.1);
+}
+
+.mss-hero {
+  position: relative;
+  width: min(100% - 2rem, 96rem);
+  margin-inline: auto;
+}
+
+.mss-hero::before {
+  position: absolute;
+  inset: 8% 0 auto auto;
+  z-index: -1;
+  width: min(32rem, 52vw);
+  height: min(32rem, 52vw);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(15, 118, 110, 0.18), transparent 68%);
+  filter: blur(12px);
+  content: "";
+}
+
+.mss-hero-content h1,
+.mss-section-heading h2,
+.mss-catalog-hero h1,
+.mss-course-detail h1,
+.mss-enrollment-strip h2 {
+  color: var(--mss-primary-dark);
+  font-weight: 850;
+}
+
+.mss-hero-content h1 {
+  text-wrap: balance;
+}
+
+.mss-hero-content p,
+.mss-catalog-hero p,
+.mss-enrollment-strip p,
+.mss-course-detail p,
+.mss-muted-text {
+  color: rgba(18, 34, 51, 0.66);
+}
+
+.mss-hero-card,
+.mss-auth-card,
+.mss-page-section,
+.mss-catalog-toolbar,
+.mss-package-card,
+.mss-detail-panel,
+.mss-content-preview,
+.mss-teacher-card,
+.mss-enroll-card,
+.mss-enroll-context-card,
+.mss-enroll-help-card,
+.mss-enroll-form,
+.mss-payment-flow,
+.mss-feature-grid article,
+.mss-stats-strip article {
+  border-color: rgba(255, 255, 255, 0.7);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.56));
+  box-shadow: var(--mss-shadow-soft);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+}
+
+.mss-hero-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.mss-hero-card::after {
+  position: absolute;
+  inset: auto -20% -32% 30%;
+  height: 10rem;
+  border-radius: 999px;
+  background: rgba(15, 118, 110, 0.16);
+  filter: blur(28px);
+  content: "";
+}
+
+.mss-eyebrow,
+.mss-hero-card span {
+  color: var(--mss-accent);
+  font-weight: 850;
+}
+
+.mss-form input,
+.mss-form select,
+.mss-form textarea,
+.mss-catalog-toolbar input,
+.mss-catalog-toolbar select,
+.mss-enroll-form input,
+.mss-enroll-form select,
+.mss-enroll-form textarea {
+  border-color: rgba(18, 34, 51, 0.12);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.mss-form input:focus,
+.mss-form select:focus,
+.mss-form textarea:focus,
+.mss-catalog-toolbar input:focus,
+.mss-catalog-toolbar select:focus,
+.mss-enroll-form input:focus,
+.mss-enroll-form select:focus,
+.mss-enroll-form textarea:focus {
+  border-color: rgba(12, 74, 110, 0.38);
+  box-shadow:
+    0 0 0 4px var(--mss-ring),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  outline: none;
+}
+
+@media (max-width: 760px) {
+  .mss-public-header {
+    position: static;
+    width: min(100% - 1rem, 96rem);
+    border-radius: 1rem;
+  }
+
+  .mss-public-nav {
+    width: 100%;
+    justify-content: center;
+    border-radius: 1rem;
+  }
+
+  .mss-public-nav a {
+    padding: 0.6rem 0.72rem;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   Sprint 8B-1: MSS typography correction
+   -------------------------------------------------------------------------- */
+
+:root {
+  --mss-font-body:
+    "Hind Siliguri",
+    "Noto Sans Bengali",
+    "Nirmala UI",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  --mss-font-heading:
+    "Manrope",
+    "Hind Siliguri",
+    "Noto Sans Bengali",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+body {
+  font-family: var(--mss-font-body);
+  font-size: 16px;
+  letter-spacing: -0.005em;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+.mss-public-nav a,
+.mss-nav-cta,
+.mss-primary-button,
+.mss-secondary-button,
+.course-card__cta,
+.mss-eyebrow,
+.mss-hero-card span,
+.mss-form label,
+.mss-catalog-toolbar label {
+  font-family: var(--mss-font-heading);
+}
+
+.mss-hero-content h1,
+.mss-section-heading h2,
+.mss-catalog-hero h1,
+.mss-course-detail h1,
+.mss-enrollment-strip h2,
+.course-card h3,
+.mss-auth-intro h2,
+.mss-dashboard-topbar h1 {
+  font-family: var(--mss-font-heading);
+  letter-spacing: -0.045em;
+}
+
+.mss-hero-content h1 {
+  line-height: 1.02;
+}
+
+.mss-hero-content p,
+.mss-catalog-hero p,
+.mss-enrollment-strip p,
+.mss-course-detail p,
+.course-card p,
+.mss-muted-text {
+  font-size: 1.04rem;
+  line-height: 1.75;
+}
+
+.course-card h3 {
+  font-weight: 800;
+}
+
+.course-card__meta span,
+.course-card__stats span,
+.course-card__mode {
+  font-family: var(--mss-font-heading);
+}
+
+.mss-public-nav a {
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  body {
+    font-size: 15.5px;
+  }
+
+  .mss-hero-content h1 {
+    letter-spacing: -0.035em;
+  }
+}
+
