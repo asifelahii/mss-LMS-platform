@@ -1,104 +1,160 @@
-<section class="mss-hero">
-  <div class="mss-hero-content">
-    <p class="mss-eyebrow">Bangla-first coaching platform</p>
-    <h1>Premium Math & Science courses for serious academic learners.</h1>
-    <p>
-      MSS provides structured courses, batches, lessons, notes, quizzes,
-      payment approval, teacher dashboards, and protected student learning access.
-    </p>
+<div class="mss-home-page">
+  <section class="mss-home-hero">
+    <div class="mss-home-hero__content">
+      <p class="mss-eyebrow">MSS Online Coaching</p>
 
-    <div class="mss-hero-actions">
-      <a routerLink="/courses" class="mss-primary-button">Explore Courses</a>
-      <a routerLink="/enroll" class="mss-secondary-button">Enroll Now</a>
+      <h1>
+        Math & Science ???? ??? structured, exam-focused, and easier to follow.
+      </h1>
+
+      <p>
+        National University/Honours-level students can learn through organized
+        courses, recorded lessons, weekly practice, notes, quizzes, and
+        guided enrollment support.
+      </p>
+
+      <div class="mss-home-hero__actions">
+        <a routerLink="/courses" class="mss-primary-button">Browse Courses</a>
+        <a routerLink="/enroll" class="mss-secondary-button">Start Enrollment</a>
+      </div>
+
+      <div class="mss-home-hero__badges" aria-label="MSS learning benefits">
+        <span>Recorded lessons</span>
+        <span>Weekly practice</span>
+        <span>Doubt support</span>
+      </div>
     </div>
-  </div>
 
-  <div class="mss-hero-card">
-    <span>Production-ready direction</span>
-    <strong>Course selling + student learning + teacher/admin operations</strong>
-    <p>Built with Angular, Nx monorepo, Supabase, and free-resource-first development.</p>
-  </div>
-</section>
+    <aside class="mss-home-enrollment-card">
+      <p class="mss-eyebrow">Batch Enrollment</p>
+      <h2>Choose your course and submit payment details online.</h2>
 
-<section class="mss-stats-strip">
-  <article>
-    <strong>4+</strong>
-    <span>Course tracks planned</span>
-  </article>
-  <article>
-    <strong>3</strong>
-    <span>Payment methods</span>
-  </article>
-  <article>
-    <strong>5</strong>
-    <span>Role-based portals</span>
-  </article>
-  <article>
-    <strong>Free-first</strong>
-    <span>Resource strategy</span>
-  </article>
-</section>
+      <div class="mss-home-selected-card">
+        <span>Learning flow</span>
+        <strong>Course ? Payment ? TXN Submit ? Admin Approval</strong>
+        <p>Access is unlocked after manual verification.</p>
+      </div>
 
-<section class="mss-home-section">
-  <div class="mss-section-heading">
+      <div class="mss-home-payment-partners">
+        <span>bKash</span>
+        <span>Nagad</span>
+        <span>Rocket</span>
+      </div>
+
+      <a routerLink="/enroll" class="mss-primary-button mss-full-button">Enroll Now</a>
+    </aside>
+  </section>
+
+  <section class="mss-home-trust-grid" aria-label="Why students choose MSS">
+    <article>
+      <span>01</span>
+      <h2>Clear chapter plan</h2>
+      <p>Follow lessons in a structured order instead of jumping between scattered resources.</p>
+    </article>
+
+    <article>
+      <span>02</span>
+      <h2>Practice-focused learning</h2>
+      <p>Use quizzes, model questions, and weekly revision to prepare for exams step by step.</p>
+    </article>
+
+    <article>
+      <span>03</span>
+      <h2>Student support</h2>
+      <p>Get help with course access, payment verification, and learning-related support.</p>
+    </article>
+
+    <article>
+      <span>04</span>
+      <h2>Protected dashboard</h2>
+      <p>Approved students can access enrolled courses, materials, and progress from one place.</p>
+    </article>
+  </section>
+
+  <section class="mss-home-section">
+    <div class="mss-home-section__heading">
+      <div>
+        <p class="mss-eyebrow">Featured Courses</p>
+        <h2>Start with a focused academic course.</h2>
+        <p>Browse available MSS courses and pick the one that matches your current study target.</p>
+      </div>
+
+      <a routerLink="/courses" class="mss-text-link">View all courses</a>
+    </div>
+
+    @if (dataNotice()) {
+      <p class="mss-form-message">{{ dataNotice() }}</p>
+    }
+
+    @if (isLoading()) {
+      <div class="mss-empty-state">
+        <h2>Loading featured courses...</h2>
+        <p>Please wait while MSS loads the latest featured courses.</p>
+      </div>
+    } @else {
+      <div class="mss-home-course-grid">
+        @for (course of featuredCourses(); track course.id) {
+          <mss-course-card [course]="course" />
+        } @empty {
+          <div class="mss-empty-state">
+            <h2>No featured courses yet</h2>
+            <p>Published featured courses will appear here.</p>
+          </div>
+        }
+      </div>
+    }
+  </section>
+
+  <section class="mss-home-process">
     <div>
-      <p class="mss-eyebrow">Featured courses</p>
-      <h2>Start with our academic course tracks.</h2>
+      <p class="mss-eyebrow">How Enrollment Works</p>
+      <h2>Simple manual payment flow for Bangladesh.</h2>
+      <p>
+        MSS keeps enrollment familiar: select course, pay with mobile financial
+        service, submit transaction details, then wait for admin approval.
+      </p>
     </div>
-    <a routerLink="/courses" class="mss-text-link">View all courses</a>
-  </div>
 
-  @if (dataNotice()) {
-    <p class="mss-form-message">{{ dataNotice() }}</p>
-  }
+    <div class="mss-home-process__steps">
+      <article>
+        <span>Step 1</span>
+        <strong>Choose course</strong>
+        <p>Select a course or package from the catalog.</p>
+      </article>
 
-  @if (isLoading()) {
-    <div class="mss-empty-state">
-      <h2>Loading featured courses...</h2>
-      <p>Please wait while MSS loads the latest featured courses.</p>
+      <article>
+        <span>Step 2</span>
+        <strong>Pay via MFS</strong>
+        <p>Use bKash, Nagad, or Rocket according to the given instruction.</p>
+      </article>
+
+      <article>
+        <span>Step 3</span>
+        <strong>Submit TXN ID</strong>
+        <p>Send payment number, transaction ID, and optional note.</p>
+      </article>
+
+      <article>
+        <span>Step 4</span>
+        <strong>Access unlocked</strong>
+        <p>Admin verifies payment and activates the student dashboard access.</p>
+      </article>
     </div>
-  } @else {
-    <div class="mss-course-grid">
-      @for (course of featuredCourses(); track course.id) {
-        <mss-course-card [course]="course" />
-      } @empty {
-        <div class="mss-empty-state">
-          <h2>No featured courses yet</h2>
-          <p>Published featured courses will appear here.</p>
-        </div>
-      }
+  </section>
+
+  <section class="mss-home-final-cta">
+    <div>
+      <p class="mss-eyebrow">Ready to start?</p>
+      <h2>Pick your course and reserve your learning access today.</h2>
+      <p>
+        Start with the available courses now. Real batch/course content can be
+        updated later from the backend as MSS grows.
+      </p>
     </div>
-  }
-</section>
 
-<section class="mss-feature-grid">
-  <article>
-    <p class="mss-eyebrow">For Students</p>
-    <h2>Learn from one organized dashboard.</h2>
-    <p>Access enrolled courses, lessons, PDFs, quizzes, payment status, and support tickets.</p>
-  </article>
-
-  <article>
-    <p class="mss-eyebrow">For Teachers</p>
-    <h2>Manage content without developer help.</h2>
-    <p>Create chapters, upload materials, add lessons, schedule releases, and track progress.</p>
-  </article>
-
-  <article>
-    <p class="mss-eyebrow">For Admins</p>
-    <h2>Control payment and access workflows.</h2>
-    <p>Approve payments, manage enrollments, handle support, and monitor audit logs.</p>
-  </article>
-</section>
-
-<section class="mss-enrollment-strip">
-  <div>
-    <p class="mss-eyebrow">Simple enrollment</p>
-    <h2>Choose course, submit payment info, wait for admin approval.</h2>
-    <p>
-      Inspired by real Bangladeshi coaching workflows: student details,
-      guardian/contact information, bKash/Nagad/Rocket transaction ID, and manual approval.
-    </p>
-  </div>
-  <a routerLink="/enroll" class="mss-primary-button">Start Enrollment</a>
-</section>
+    <div class="mss-home-final-cta__actions">
+      <a routerLink="/courses" class="mss-secondary-button">Explore Courses</a>
+      <a routerLink="/enroll" class="mss-primary-button">Enroll Now</a>
+    </div>
+  </section>
+</div>

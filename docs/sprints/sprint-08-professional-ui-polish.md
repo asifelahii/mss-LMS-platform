@@ -111,3 +111,19 @@ This is a structure-only refactor. Supabase login, registration, validation, and
 ## Sprint 8B-3 Batch 4 Notes
 
 All current app page components now follow the component-named folder convention.
+
+## Sprint 8C Started
+
+- [x] Reworked homepage from developer-demo messaging into student-facing course-selling messaging
+- [x] Added Bangla/English academic positioning
+- [x] Added conversion-focused hero section
+- [x] Added trust cards for course plan, practice, support, and dashboard access
+- [x] Preserved Supabase-powered featured course loading
+- [x] Added Bangladesh-friendly enrollment process section
+- [x] Added bKash/Nagad/Rocket payment trust strip
+- [x] Added final conversion CTA
+- [x] Kept homepage styling inside public-home.page.scss
+
+## Sprint 8C Notes
+
+The homepage is now closer to a real coaching/course-selling landing page. It avoids developer-facing language and focuses on student outcomes, enrollment, and trust.

@@ -1,3 +1,298 @@
 :host {
   display: block;
 }
+
+.mss-home-page {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.mss-home-hero,
+.mss-home-section,
+.mss-home-process,
+.mss-home-final-cta {
+  width: min(100% - 2rem, 96rem);
+  margin-inline: auto;
+}
+
+.mss-home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(20rem, 0.88fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  padding-top: clamp(2.5rem, 7vw, 6.5rem);
+}
+
+.mss-home-hero__content {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.mss-home-hero h1 {
+  max-width: 58rem;
+  margin: 0;
+  color: var(--mss-primary-dark);
+  font-family: var(--mss-font-heading);
+  font-size: clamp(2.75rem, 6.6vw, 5.9rem);
+  font-weight: 850;
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+  text-wrap: balance;
+}
+
+.mss-home-hero p {
+  max-width: 43rem;
+  margin: 0;
+  color: rgba(18, 34, 51, 0.68);
+  font-size: clamp(1.03rem, 1.4vw, 1.18rem);
+  line-height: 1.8;
+}
+
+.mss-home-hero__actions,
+.mss-home-final-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.mss-home-hero__badges,
+.mss-home-payment-partners {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.mss-home-hero__badges span,
+.mss-home-payment-partners span {
+  border: 1px solid rgba(18, 34, 51, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.64);
+  color: rgba(18, 34, 51, 0.72);
+  padding: 0.55rem 0.78rem;
+  font-family: var(--mss-font-heading);
+  font-size: 0.88rem;
+  font-weight: 750;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.76);
+}
+
+.mss-home-enrollment-card,
+.mss-home-trust-grid article,
+.mss-home-process,
+.mss-home-final-cta {
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.58));
+  box-shadow:
+    0 24px 70px rgba(15, 32, 43, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+}
+
+.mss-home-enrollment-card {
+  display: grid;
+  gap: 1rem;
+  border-radius: 2rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.mss-home-enrollment-card h2,
+.mss-home-section__heading h2,
+.mss-home-process h2,
+.mss-home-final-cta h2 {
+  margin: 0;
+  color: var(--mss-primary-dark);
+  font-family: var(--mss-font-heading);
+  font-weight: 850;
+  letter-spacing: -0.045em;
+}
+
+.mss-home-enrollment-card h2 {
+  font-size: clamp(1.7rem, 3vw, 2.55rem);
+  line-height: 1.08;
+}
+
+.mss-home-selected-card {
+  display: grid;
+  gap: 0.35rem;
+  border: 1px solid rgba(12, 74, 110, 0.1);
+  border-radius: 1.35rem;
+  background:
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.14), transparent 18rem),
+    rgba(255, 255, 255, 0.68);
+  padding: 1rem;
+}
+
+.mss-home-selected-card span {
+  color: var(--mss-accent);
+  font-family: var(--mss-font-heading);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mss-home-selected-card strong {
+  color: var(--mss-primary-dark);
+  font-size: 1.08rem;
+}
+
+.mss-home-selected-card p {
+  margin: 0;
+  color: rgba(18, 34, 51, 0.62);
+  line-height: 1.6;
+}
+
+.mss-home-trust-grid {
+  display: grid;
+  width: min(100% - 2rem, 96rem);
+  margin-inline: auto;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.mss-home-trust-grid article {
+  display: grid;
+  gap: 0.55rem;
+  border-radius: 1.45rem;
+  padding: 1.15rem;
+}
+
+.mss-home-trust-grid span,
+.mss-home-process__steps span {
+  color: var(--mss-accent);
+  font-family: var(--mss-font-heading);
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.mss-home-trust-grid h2 {
+  margin: 0;
+  color: var(--mss-primary-dark);
+  font-family: var(--mss-font-heading);
+  font-size: 1.15rem;
+  letter-spacing: -0.025em;
+}
+
+.mss-home-trust-grid p,
+.mss-home-section__heading p,
+.mss-home-process p,
+.mss-home-final-cta p {
+  margin: 0;
+  color: rgba(18, 34, 51, 0.64);
+  line-height: 1.65;
+}
+
+.mss-home-section {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.mss-home-section__heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mss-home-section__heading > div {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.mss-home-section__heading h2,
+.mss-home-process h2,
+.mss-home-final-cta h2 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.mss-home-course-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.mss-home-process {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  border-radius: 2rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.mss-home-process > div:first-child,
+.mss-home-final-cta > div:first-child {
+  display: grid;
+  align-content: center;
+  gap: 0.65rem;
+}
+
+.mss-home-process__steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.mss-home-process__steps article {
+  display: grid;
+  gap: 0.35rem;
+  border: 1px solid rgba(18, 34, 51, 0.08);
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.56);
+  padding: 1rem;
+}
+
+.mss-home-process__steps strong {
+  color: var(--mss-primary-dark);
+  font-family: var(--mss-font-heading);
+}
+
+.mss-home-final-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  border-radius: 2rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+@media (max-width: 1100px) {
+  .mss-home-trust-grid,
+  .mss-home-course-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mss-home-hero,
+  .mss-home-process {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .mss-home-page {
+    gap: 2.5rem;
+  }
+
+  .mss-home-hero {
+    padding-top: 2.25rem;
+  }
+
+  .mss-home-hero h1 {
+    font-size: clamp(2.35rem, 13vw, 3.8rem);
+  }
+
+  .mss-home-trust-grid,
+  .mss-home-course-grid,
+  .mss-home-process__steps {
+    grid-template-columns: 1fr;
+  }
+
+  .mss-home-section__heading,
+  .mss-home-final-cta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
