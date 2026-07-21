@@ -60,3 +60,6 @@ tmp/
 coverage/
 .nx/cache/
 .angular/cache/
+
+# Angular local environment override
+apps/web/src/environments/environment.local.ts
