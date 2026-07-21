@@ -74,3 +74,22 @@ Pushed migrations:
 - 20260718213000_storage_policies.sql
 
 The CLI showed a Docker-related cache warning after the push. This did not block the remote migration push because the command finished successfully.
+
+## Sprint 7C Completed
+
+- [x] Created course-thumbnails bucket as public
+- [x] Created lesson-materials bucket as private
+- [x] Created payment-proofs bucket as private
+- [x] Created profile-avatars bucket as private
+- [x] Confirmed storage policies are visible on created buckets
+
+## Sprint 7C Notes
+
+Storage bucket setup now matches the planned MSS storage architecture.
+
+Bucket visibility:
+
+- course-thumbnails: public
+- lesson-materials: private
+- payment-proofs: private
+- profile-avatars: private
