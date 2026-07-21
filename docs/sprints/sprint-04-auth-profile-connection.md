@@ -68,3 +68,48 @@ The app root now tries to load the current Supabase profile at startup. If Supab
 The login page no longer owns redirect logic. Redirect behavior now lives in the shared auth utility and is covered by unit tests.
 
 Dashboard navigation now avoids showing all role dashboards once a real user profile is loaded.
+
+## Sprint 4 Final Status
+
+Sprint 4 connects the MSS auth foundation to Supabase Auth and the `profiles` table.
+
+## Completed Summary
+
+- [x] Added SupabaseAuthService
+- [x] Added register with profile creation
+- [x] Added login with profile loading
+- [x] Added logout workflow
+- [x] Added current profile bootstrap on app startup
+- [x] Connected login page to Supabase auth service
+- [x] Connected register page to Supabase auth service
+- [x] Added role-based redirect utility
+- [x] Added role redirect tests
+- [x] Improved auth, guest, and role guards
+- [x] Added dashboard logout UI
+- [x] Added dashboard role-aware navigation
+- [x] Kept local development safe when Supabase is not configured
+- [x] Verified auth tests
+- [x] Verified production build
+
+## Acceptance Criteria
+
+- [x] Login page calls Supabase auth service
+- [x] Register page calls Supabase auth service
+- [x] Auth state stores the current profile
+- [x] Role redirect utility is shared and tested
+- [x] Dashboard logout clears profile state
+- [x] Route guards can load the current profile when enabled
+- [x] App still builds without real Supabase credentials
+- [x] Production bundle remains under current budget
+
+## Remaining Real-Backend Work
+
+These require an actual Supabase project:
+
+- Apply migrations
+- Create storage buckets
+- Add Supabase URL and anon key
+- Test real signup/login
+- Verify email confirmation behavior
+- Verify profile creation under RLS
+- Enable guards in development after real auth is confirmed
