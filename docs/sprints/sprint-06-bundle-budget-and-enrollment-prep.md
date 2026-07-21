@@ -38,3 +38,21 @@ This keeps public browsing lighter and prepares the app for future feature growt
 The route file no longer imports auth guards statically from the auth barrel. Guards are now loaded only when a guarded route is evaluated.
 
 The app config now avoids importing provider tokens from library barrels. This is intentionally done to reduce initial bundle pressure while the app is still small and close to the default bundle budget.
+
+## Sprint 6C Completed
+
+- [x] Made EnrollmentDataService use Supabase client lazily
+- [x] Added EnrollmentDataService configuration check
+- [x] Connected enrollment page to CatalogDataService for course/package options
+- [x] Connected enrollment page to EnrollmentDataService for real pending enrollment requests
+- [x] Added logged-in profile requirement for real enrollment submission
+- [x] Preserved demo-preview mode when Supabase is not configured
+- [x] Added loading and submitting states
+- [x] Added admin note generation from student form details
+- [x] Preserved future payment proof upload placeholder
+
+## Sprint 6C Notes
+
+The enrollment page can now create real pending enrollment and payment request records when Supabase is configured and the user is logged in.
+
+Without Supabase credentials, the page remains safe for portfolio/demo browsing and shows a local preview message instead of crashing.

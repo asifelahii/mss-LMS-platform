@@ -29,7 +29,11 @@ export interface CreateEnrollmentWithPaymentResult {
   providedIn: 'root',
 })
 export class EnrollmentDataService {
-  private readonly supabaseClient = inject(SupabaseClientService).client;
+  private readonly supabase = inject(SupabaseClientService);
+
+  isConfigured(): boolean {
+    return this.supabase.isConfigured();
+  }
 
   async createEnrollmentWithPayment(
     input: CreateEnrollmentWithPaymentInput
@@ -42,7 +46,7 @@ export class EnrollmentDataService {
       throw new Error('Payment amount cannot be negative.');
     }
 
-    const { data: enrollmentData, error: enrollmentError } = await this.supabaseClient
+    const { data: enrollmentData, error: enrollmentError } = await this.supabase.client
       .from('enrollments')
       .insert({
         student_id: input.studentId,
@@ -60,7 +64,7 @@ export class EnrollmentDataService {
 
     const enrollment = enrollmentData as DbEnrollmentRow;
 
-    const { data: paymentData, error: paymentError } = await this.supabaseClient
+    const { data: paymentData, error: paymentError } = await this.supabase.client
       .from('payment_requests')
       .insert({
         enrollment_id: enrollment.id,
@@ -88,7 +92,7 @@ export class EnrollmentDataService {
   }
 
   async listMyEnrollments(studentId: string): Promise<DbEnrollmentRow[]> {
-    const { data, error } = await this.supabaseClient
+    const { data, error } = await this.supabase.client
       .from('enrollments')
       .select('*')
       .eq('student_id', studentId)
@@ -102,7 +106,7 @@ export class EnrollmentDataService {
   }
 
   async listMyPaymentRequests(studentId: string): Promise<DbPaymentRequestRow[]> {
-    const { data, error } = await this.supabaseClient
+    const { data, error } = await this.supabase.client
       .from('payment_requests')
       .select('*')
       .eq('student_id', studentId)
