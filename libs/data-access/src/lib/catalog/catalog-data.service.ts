@@ -2,33 +2,36 @@ import { inject, Injectable } from '@angular/core';
 
 import { CourseCatalogItem, CoursePackage } from '@mss-platform/models';
 
-import { DbCoursePackageRow, DbCourseRow } from '../database/database-row.types';
 import { SupabaseClientService } from '../supabase/supabase-client.service';
+import { DbCoursePackageRow, DbCourseRow } from '../database/database-row.types';
 import { mapCourseRowToCatalogItem, mapPackageRowToCoursePackage } from './catalog.mappers';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CatalogDataService {
-  private readonly supabaseClient = inject(SupabaseClientService).client;
+  private readonly supabase = inject(SupabaseClientService);
+
+  isConfigured(): boolean {
+    return this.supabase.isConfigured();
+  }
 
   async listPublishedCourses(): Promise<CourseCatalogItem[]> {
-    const { data, error } = await this.supabaseClient
+    const { data, error } = await this.supabase.client
       .from('courses')
       .select('*')
       .eq('status', 'published')
-      .order('is_featured', { ascending: false })
       .order('created_at', { ascending: false });
 
     if (error) {
-      throw new Error(`Failed to load courses: ${error.message}`);
+      throw new Error(`Course catalog loading failed: ${error.message}`);
     }
 
     return ((data ?? []) as DbCourseRow[]).map(mapCourseRowToCatalogItem);
   }
 
   async getPublishedCourseBySlug(slug: string): Promise<CourseCatalogItem | null> {
-    const { data, error } = await this.supabaseClient
+    const { data, error } = await this.supabase.client
       .from('courses')
       .select('*')
       .eq('slug', slug)
@@ -36,29 +39,28 @@ export class CatalogDataService {
       .maybeSingle();
 
     if (error) {
-      throw new Error(`Failed to load course: ${error.message}`);
+      throw new Error(`Course detail loading failed: ${error.message}`);
     }
 
     return data ? mapCourseRowToCatalogItem(data as DbCourseRow) : null;
   }
 
   async listPublishedPackages(): Promise<CoursePackage[]> {
-    const { data, error } = await this.supabaseClient
+    const { data, error } = await this.supabase.client
       .from('course_packages')
       .select('*')
       .eq('status', 'published')
-      .order('is_popular', { ascending: false })
       .order('created_at', { ascending: false });
 
     if (error) {
-      throw new Error(`Failed to load packages: ${error.message}`);
+      throw new Error(`Package catalog loading failed: ${error.message}`);
     }
 
     return ((data ?? []) as DbCoursePackageRow[]).map(mapPackageRowToCoursePackage);
   }
 
   async getPublishedPackageBySlug(slug: string): Promise<CoursePackage | null> {
-    const { data, error } = await this.supabaseClient
+    const { data, error } = await this.supabase.client
       .from('course_packages')
       .select('*')
       .eq('slug', slug)
@@ -66,7 +68,7 @@ export class CatalogDataService {
       .maybeSingle();
 
     if (error) {
-      throw new Error(`Failed to load package: ${error.message}`);
+      throw new Error(`Package detail loading failed: ${error.message}`);
     }
 
     return data ? mapPackageRowToCoursePackage(data as DbCoursePackageRow) : null;
