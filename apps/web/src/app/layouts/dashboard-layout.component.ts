@@ -62,7 +62,7 @@ export class DashboardLayoutComponent {
       return 'No active role';
     }
 
-    return role.replaceAll('_', ' ');
+    return role.replace(/_/g, ' ');
   });
 
   protected async logout(): Promise<void> {
@@ -79,3 +79,4 @@ export class DashboardLayoutComponent {
     }
   }
 }
+
