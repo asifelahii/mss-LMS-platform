@@ -21,3 +21,19 @@ Connect MSS authentication to Supabase Auth and the `profiles` table while keepi
 The login and register UI are not connected yet. Sprint 4A only adds the tested service foundation.
 
 The service creates a row in `profiles` after Supabase Auth signup. In a real Supabase project, this depends on the email confirmation/session behavior and RLS. If email confirmation is enabled, a database trigger or Edge Function may be needed later for profile creation.
+
+## Sprint 4B Completed
+
+- [x] Made SupabaseClientService safer for unconfigured local development
+- [x] Updated SupabaseAuthService to access Supabase client lazily
+- [x] Connected login page to SupabaseAuthService
+- [x] Added role-based redirect after login
+- [x] Connected register page to SupabaseAuthService
+- [x] Added registration redirect to student dashboard
+- [x] Added loading states and readable error messages for auth forms
+
+## Sprint 4B Notes
+
+Login and registration now call the real auth service. Without real Supabase URL and anon key, the forms will show a configuration error instead of crashing the app.
+
+Real end-to-end auth testing still requires a Supabase project, migrations, storage buckets, and email/auth settings to be configured.

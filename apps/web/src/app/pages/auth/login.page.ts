@@ -1,101 +1,110 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+
+import { SupabaseAuthService } from '@mss-platform/auth';
+import { UserRole } from '@mss-platform/models';
 
 @Component({
   selector: 'mss-login-page',
   imports: [ReactiveFormsModule, RouterLink],
   template: `
-    <section class="mss-auth-page">
-      <div class="mss-auth-grid">
-        <aside class="mss-auth-intro">
-          <p class="mss-eyebrow">Welcome back</p>
-          <h2>Continue your learning journey with MSS.</h2>
-          <p>
-            Access your enrolled courses, lesson progress, payment status,
-            materials, quizzes, and support from one secure dashboard.
-          </p>
+    <section class="mss-auth-grid">
+      <div class="mss-auth-intro">
+        <p class="mss-eyebrow">Student Login</p>
+        <h1>Continue your MSS learning journey.</h1>
+        <p>
+          Login will connect to Supabase Auth. After login, MSS will load your profile,
+          detect your role, and redirect you to the correct dashboard.
+        </p>
 
-          <div class="mss-auth-highlights">
-            <span>Protected course access</span>
-            <span>Progress tracking</span>
-            <span>Teacher-guided learning</span>
-          </div>
-        </aside>
-
-        <div class="mss-auth-card">
-          <p class="mss-eyebrow">Login</p>
-          <h2>Login to your account</h2>
-          <p class="mss-muted-text">
-            Supabase Auth will be connected later. For now, this is the production UI skeleton.
-          </p>
-
-          <form class="mss-form" [formGroup]="loginForm" (ngSubmit)="submit()">
-            <label>
-              Email address
-              <input
-                type="email"
-                formControlName="email"
-                placeholder="student@example.com"
-                autocomplete="email"
-              />
-            </label>
-
-            <label>
-              Password
-              <input
-                type="password"
-                formControlName="password"
-                placeholder="Enter your password"
-                autocomplete="current-password"
-              />
-            </label>
-
-            <div class="mss-form-row">
-              <label class="mss-inline-check">
-                <input type="checkbox" formControlName="rememberMe" />
-                Remember me
-              </label>
-
-              <a routerLink="/forgot-password" class="mss-text-link">Forgot password?</a>
-            </div>
-
-            @if (message()) {
-              <p class="mss-form-message">{{ message() }}</p>
-            }
-
-            <button class="mss-primary-button mss-full-button" type="submit">
-              Login
-            </button>
-          </form>
-
-          <p class="mss-auth-switch">
-            New to MSS?
-            <a routerLink="/register">Create an account</a>
-          </p>
+        <div class="mss-auth-highlights">
+          <span>Student dashboard</span>
+          <span>Teacher dashboard</span>
+          <span>Admin approval workflow</span>
         </div>
       </div>
+
+      <form class="mss-auth-card mss-form" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+        <div>
+          <p class="mss-eyebrow">Welcome back</p>
+          <h2>Login to MSS</h2>
+          <p class="mss-muted-text">Use your registered email and password.</p>
+        </div>
+
+        <label>
+          Email
+          <input formControlName="email" type="email" placeholder="you@example.com" />
+        </label>
+
+        <label>
+          Password
+          <input formControlName="password" type="password" placeholder="Enter your password" />
+        </label>
+
+        @if (message()) {
+          <p class="mss-form-message">{{ message() }}</p>
+        }
+
+        <button type="submit" class="mss-primary-button mss-full-button" [disabled]="isSubmitting()">
+          {{ isSubmitting() ? 'Logging in...' : 'Login' }}
+        </button>
+
+        <p class="mss-auth-switch">
+          New to MSS?
+          <a routerLink="/register">Create an account</a>
+        </p>
+      </form>
     </section>
   `,
 })
 export class LoginPageComponent {
-  private readonly fb = inject(FormBuilder);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly authService = inject(SupabaseAuthService);
+  private readonly router = inject(Router);
 
+  protected readonly isSubmitting = signal(false);
   protected readonly message = signal('');
 
-  protected readonly loginForm = this.fb.nonNullable.group({
+  protected readonly loginForm = this.formBuilder.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-    rememberMe: [true],
+    password: ['', [Validators.required]],
   });
 
-  protected submit(): void {
+  protected async submitLogin(): Promise<void> {
+    this.message.set('');
+
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       this.message.set('Please enter a valid email and password.');
       return;
     }
 
-    this.message.set('Login UI is ready. Supabase Auth will be connected next.');
+    this.isSubmitting.set(true);
+
+    try {
+      const profile = await this.authService.loginWithPassword(this.loginForm.getRawValue());
+      await this.router.navigateByUrl(this.getRoleRedirect(profile.role));
+    } catch (error) {
+      this.message.set(this.getReadableError(error));
+    } finally {
+      this.isSubmitting.set(false);
+    }
+  }
+
+  private getRoleRedirect(role: UserRole): string {
+    if (role === 'teacher') {
+      return '/teacher';
+    }
+
+    if (role === 'admin' || role === 'super_admin' || role === 'support') {
+      return '/admin';
+    }
+
+    return '/student';
+  }
+
+  private getReadableError(error: unknown): string {
+    return error instanceof Error ? error.message : 'Login failed. Please try again.';
   }
 }

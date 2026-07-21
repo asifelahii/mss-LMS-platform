@@ -34,11 +34,11 @@ export interface LoginWithPasswordInput {
   providedIn: 'root',
 })
 export class SupabaseAuthService {
-  private readonly supabaseClient = inject(SupabaseClientService).client;
+  private readonly supabase = inject(SupabaseClientService);
   private readonly authState = inject(AuthStateService);
 
   async registerWithProfile(input: RegisterWithProfileInput): Promise<UserProfile> {
-    const { data, error } = await this.supabaseClient.auth.signUp({
+    const { data, error } = await this.supabase.client.auth.signUp({
       email: input.email,
       password: input.password,
     });
@@ -67,7 +67,7 @@ export class SupabaseAuthService {
   }
 
   async loginWithPassword(input: LoginWithPasswordInput): Promise<UserProfile> {
-    const { data, error } = await this.supabaseClient.auth.signInWithPassword({
+    const { data, error } = await this.supabase.client.auth.signInWithPassword({
       email: input.email,
       password: input.password,
     });
@@ -90,7 +90,7 @@ export class SupabaseAuthService {
   }
 
   async loadCurrentProfile(): Promise<UserProfile | null> {
-    const { data, error } = await this.supabaseClient.auth.getUser();
+    const { data, error } = await this.supabase.client.auth.getUser();
 
     if (error) {
       this.authState.clearProfile();
@@ -112,7 +112,7 @@ export class SupabaseAuthService {
   }
 
   async logout(): Promise<void> {
-    const { error } = await this.supabaseClient.auth.signOut();
+    const { error } = await this.supabase.client.auth.signOut();
 
     if (error) {
       throw new Error(`Logout failed: ${error.message}`);
@@ -128,7 +128,7 @@ export class SupabaseAuthService {
     phone?: string;
     role: UserRole;
   }): Promise<UserProfile> {
-    const { data, error } = await this.supabaseClient
+    const { data, error } = await this.supabase.client
       .from('profiles')
       .insert({
         id: input.id,
@@ -149,7 +149,7 @@ export class SupabaseAuthService {
   }
 
   private async loadProfileByUserId(userId: string): Promise<UserProfile> {
-    const { data, error } = await this.supabaseClient
+    const { data, error } = await this.supabase.client
       .from('profiles')
       .select('*')
       .eq('id', userId)
