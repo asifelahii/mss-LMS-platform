@@ -55,3 +55,16 @@ Real end-to-end auth testing still requires a Supabase project, migrations, stor
 Route guards still respect the environment flag. In development, guards can remain disabled while UI work continues. In production, guards will load the current Supabase profile and protect dashboards by role.
 
 The app root now tries to load the current Supabase profile at startup. If Supabase is not configured yet, the error is safely ignored for local UI development.
+
+## Sprint 4D Completed
+
+- [x] Added role redirect utility tests
+- [x] Updated login page to use shared role redirect utility
+- [x] Improved dashboard navigation links by current role
+- [x] Kept fallback dashboard links for local development without active profile
+
+## Sprint 4D Notes
+
+The login page no longer owns redirect logic. Redirect behavior now lives in the shared auth utility and is covered by unit tests.
+
+Dashboard navigation now avoids showing all role dashboards once a real user profile is loaded.

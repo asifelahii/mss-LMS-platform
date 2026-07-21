@@ -2,8 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
-import { SupabaseAuthService } from '@mss-platform/auth';
-import { UserRole } from '@mss-platform/models';
+import { getRoleRedirectPath, SupabaseAuthService } from '@mss-platform/auth';
 
 @Component({
   selector: 'mss-login-page',
@@ -84,24 +83,12 @@ export class LoginPageComponent {
 
     try {
       const profile = await this.authService.loginWithPassword(this.loginForm.getRawValue());
-      await this.router.navigateByUrl(this.getRoleRedirect(profile.role));
+      await this.router.navigateByUrl(getRoleRedirectPath(profile.role));
     } catch (error) {
       this.message.set(this.getReadableError(error));
     } finally {
       this.isSubmitting.set(false);
     }
-  }
-
-  private getRoleRedirect(role: UserRole): string {
-    if (role === 'teacher') {
-      return '/teacher';
-    }
-
-    if (role === 'admin' || role === 'super_admin' || role === 'support') {
-      return '/admin';
-    }
-
-    return '/student';
   }
 
   private getReadableError(error: unknown): string {

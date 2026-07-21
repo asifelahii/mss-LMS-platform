@@ -3,6 +3,11 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 import { AuthStateService, SupabaseAuthService } from '@mss-platform/auth';
 
+interface DashboardNavLink {
+  label: string;
+  href: string;
+}
+
 @Component({
   selector: 'mss-dashboard-layout',
   imports: [RouterLink, RouterOutlet],
@@ -21,11 +26,9 @@ import { AuthStateService, SupabaseAuthService } from '@mss-platform/auth';
         </div>
 
         <nav class="mss-dashboard-nav" aria-label="Dashboard navigation">
-          <a routerLink="/student">Student</a>
-          <a routerLink="/teacher">Teacher</a>
-          <a routerLink="/admin">Admin</a>
-          <a routerLink="/courses">Courses</a>
-          <a routerLink="/packages">Packages</a>
+          @for (link of dashboardLinks(); track link.href) {
+            <a [routerLink]="link.href">{{ link.label }}</a>
+          }
         </nav>
 
         <button type="button" class="mss-dashboard-logout" (click)="logout()" [disabled]="isLoggingOut()">
@@ -65,6 +68,42 @@ export class DashboardLayoutComponent {
     return role.replace(/_/g, ' ');
   });
 
+  protected readonly dashboardLinks = computed<DashboardNavLink[]>(() => {
+    const role = this.authState.currentRole();
+
+    if (role === 'teacher') {
+      return [
+        { label: 'Teacher Dashboard', href: '/teacher' },
+        { label: 'Courses', href: '/courses' },
+        { label: 'Packages', href: '/packages' },
+      ];
+    }
+
+    if (role === 'admin' || role === 'super_admin' || role === 'support') {
+      return [
+        { label: 'Admin Dashboard', href: '/admin' },
+        { label: 'Courses', href: '/courses' },
+        { label: 'Packages', href: '/packages' },
+      ];
+    }
+
+    if (role === 'student') {
+      return [
+        { label: 'Student Dashboard', href: '/student' },
+        { label: 'Courses', href: '/courses' },
+        { label: 'Packages', href: '/packages' },
+      ];
+    }
+
+    return [
+      { label: 'Student Dashboard', href: '/student' },
+      { label: 'Teacher Dashboard', href: '/teacher' },
+      { label: 'Admin Dashboard', href: '/admin' },
+      { label: 'Courses', href: '/courses' },
+      { label: 'Packages', href: '/packages' },
+    ];
+  });
+
   protected async logout(): Promise<void> {
     this.message.set('');
     this.isLoggingOut.set(true);
@@ -79,4 +118,3 @@ export class DashboardLayoutComponent {
     }
   }
 }
-
