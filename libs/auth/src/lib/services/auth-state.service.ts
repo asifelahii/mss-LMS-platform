@@ -6,27 +6,25 @@ import { UserProfile, UserRole } from '@mss-platform/models';
   providedIn: 'root',
 })
 export class AuthStateService {
-  private readonly currentProfileState = signal<UserProfile | null>(null);
+  private readonly profileSignal = signal<UserProfile | null>(null);
 
-  readonly currentProfile = computed(() => this.currentProfileState());
-  readonly isAuthenticated = computed(() => Boolean(this.currentProfileState()));
-  readonly currentRole = computed(() => this.currentProfileState()?.role ?? null);
+  readonly currentProfile = this.profileSignal.asReadonly();
 
-  setProfile(profile: UserProfile | null): void {
-    this.currentProfileState.set(profile);
+  readonly isAuthenticated = computed(() => this.profileSignal() !== null);
+
+  readonly currentRole = computed<UserRole | null>(() => this.profileSignal()?.role ?? null);
+
+  setProfile(profile: UserProfile): void {
+    this.profileSignal.set(profile);
   }
 
   clearProfile(): void {
-    this.currentProfileState.set(null);
+    this.profileSignal.set(null);
   }
 
-  hasAnyRole(allowedRoles: UserRole[]): boolean {
+  hasAnyRole(roles: UserRole[]): boolean {
     const role = this.currentRole();
 
-    if (!role) {
-      return false;
-    }
-
-    return allowedRoles.includes(role);
+    return role !== null && roles.includes(role);
   }
 }
