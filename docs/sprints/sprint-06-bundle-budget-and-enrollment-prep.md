@@ -56,3 +56,48 @@ The app config now avoids importing provider tokens from library barrels. This i
 The enrollment page can now create real pending enrollment and payment request records when Supabase is configured and the user is logged in.
 
 Without Supabase credentials, the page remains safe for portfolio/demo browsing and shows a local preview message instead of crashing.
+
+## Sprint 6 Final Status
+
+Sprint 6 reduced initial bundle pressure and connected the public enrollment page to the Supabase-ready enrollment/payment service.
+
+## Completed Summary
+
+- [x] Removed root auth bootstrap from App
+- [x] Lazy-loaded auth guards from route config
+- [x] Moved Supabase config token to a lightweight file
+- [x] Updated SupabaseClientService to use lightweight token
+- [x] Reduced initial bundle from around 497 kB to around 274 kB
+- [x] Made EnrollmentDataService lazy and safe
+- [x] Added EnrollmentDataService configuration check
+- [x] Connected enrollment options to CatalogDataService
+- [x] Connected enrollment submission to EnrollmentDataService
+- [x] Added real logged-in profile requirement for backend enrollment
+- [x] Preserved demo-preview enrollment mode without Supabase credentials
+- [x] Preserved payment proof upload placeholder for future storage work
+- [x] Verified data-access tests
+- [x] Verified auth tests
+- [x] Verified production build
+
+## Acceptance Criteria
+
+- [x] Initial bundle is safely below budget
+- [x] Auth/Supabase-heavy code is lazy-loaded
+- [x] Public pages still work without Supabase credentials
+- [x] Enrollment page does not crash without Supabase credentials
+- [x] Enrollment page can create pending enrollment/payment request when Supabase is configured and user is logged in
+- [x] Existing catalog and auth tests remain passing
+- [x] Production build passes
+
+## Remaining Real-Backend Work
+
+These require a real Supabase project:
+
+- Apply migrations
+- Add Supabase URL and anon key
+- Register/login with a real user
+- Verify profile loading
+- Verify real enrollment creation
+- Verify payment request creation
+- Verify admin approval workflow later
+- Add payment proof upload with Supabase Storage
