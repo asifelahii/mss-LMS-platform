@@ -35,3 +35,18 @@ The public pages are not connected yet. Sprint 5B will connect `/courses`, `/cou
 Public catalog pages now prefer Supabase data when credentials are configured. Without credentials, the app continues to show the existing demo catalog and package data.
 
 This keeps the project portfolio-safe before the real Supabase project is connected.
+
+## Sprint 5C Completed
+
+- [x] Connected homepage featured courses to CatalogDataService
+- [x] Added Supabase-first featured course loading
+- [x] Added demo fallback when Supabase is not configured
+- [x] Added demo fallback when featured course loading fails
+- [x] Added loading and empty states for homepage featured courses
+- [x] Preserved existing homepage layout and course cards
+
+## Sprint 5C Notes
+
+The homepage now uses the same catalog data service as `/courses`, `/courses/:slug`, and `/packages`.
+
+The app still remains safe for local UI development without real Supabase credentials.

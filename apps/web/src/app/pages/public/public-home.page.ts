@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { CatalogDataService } from '@mss-platform/data-access';
+import { CourseCatalogItem } from '@mss-platform/models';
 import { CourseCardComponent } from '@mss-platform/ui';
 
 import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
+
+const FEATURED_COURSE_FALLBACK = COURSE_CATALOG_ITEMS.filter((course) => course.isFeatured);
 
 @Component({
   selector: 'mss-public-home-page',
@@ -59,11 +63,27 @@ import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
         <a routerLink="/courses" class="mss-text-link">View all courses</a>
       </div>
 
-      <div class="mss-course-grid">
-        @for (course of featuredCourses; track course.id) {
-          <mss-course-card [course]="course" />
-        }
-      </div>
+      @if (dataNotice()) {
+        <p class="mss-form-message">{{ dataNotice() }}</p>
+      }
+
+      @if (isLoading()) {
+        <div class="mss-empty-state">
+          <h2>Loading featured courses...</h2>
+          <p>Please wait while MSS loads the latest featured courses.</p>
+        </div>
+      } @else {
+        <div class="mss-course-grid">
+          @for (course of featuredCourses(); track course.id) {
+            <mss-course-card [course]="course" />
+          } @empty {
+            <div class="mss-empty-state">
+              <h2>No featured courses yet</h2>
+              <p>Published featured courses will appear here.</p>
+            </div>
+          }
+        </div>
+      }
     </section>
 
     <section class="mss-feature-grid">
@@ -99,6 +119,41 @@ import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
     </section>
   `,
 })
-export class PublicHomePageComponent {
-  protected readonly featuredCourses = COURSE_CATALOG_ITEMS.filter((course) => course.isFeatured);
+export class PublicHomePageComponent implements OnInit {
+  private readonly catalogDataService = inject(CatalogDataService);
+
+  protected readonly featuredCourses = signal<CourseCatalogItem[]>(FEATURED_COURSE_FALLBACK);
+  protected readonly isLoading = signal(false);
+  protected readonly dataNotice = signal('');
+
+  ngOnInit(): void {
+    void this.loadFeaturedCourses();
+  }
+
+  private async loadFeaturedCourses(): Promise<void> {
+    if (!this.catalogDataService.isConfigured()) {
+      this.featuredCourses.set(FEATURED_COURSE_FALLBACK);
+      this.dataNotice.set('Demo featured courses are shown because Supabase is not configured yet.');
+      return;
+    }
+
+    this.isLoading.set(true);
+    this.dataNotice.set('');
+
+    try {
+      const courses = await this.catalogDataService.listPublishedCourses();
+      const featuredCourses = courses.filter((course) => course.isFeatured);
+
+      this.featuredCourses.set(featuredCourses);
+    } catch (error) {
+      this.featuredCourses.set(FEATURED_COURSE_FALLBACK);
+      this.dataNotice.set(
+        error instanceof Error
+          ? `${error.message} Showing demo featured courses for now.`
+          : 'Featured courses could not be loaded. Showing demo featured courses for now.'
+      );
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
 }
