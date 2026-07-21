@@ -55,3 +55,18 @@ component-name/
 - component-name.component.spec.ts, optional
 
 Inline templates should be avoided except for very small temporary components.
+
+## Sprint 8B-3 Batch 1 Completed
+
+- [x] Moved PublicHomePageComponent into a component-named folder
+- [x] Split public home page into TS, HTML, and SCSS files
+- [x] Moved CourseCatalogPageComponent into a component-named folder
+- [x] Split course catalog page into TS, HTML, and SCSS files
+- [x] Moved PackagesPageComponent into a component-named folder
+- [x] Split packages page into TS, HTML, and SCSS files
+- [x] Updated lazy route imports
+- [x] Removed old flat public page files
+
+## Sprint 8B-3 Notes
+
+This is a structure-only refactor. Public course, package, and homepage Supabase loading behavior should remain unchanged.

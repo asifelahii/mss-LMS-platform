@@ -24,13 +24,13 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./pages/public/public-home.page').then((m) => m.PublicHomePageComponent),
+          import('./pages/public/public-home/public-home.page').then((m) => m.PublicHomePageComponent),
         title: 'MSS | Math & Science Seekers',
       },
       {
         path: 'courses',
         loadComponent: () =>
-          import('./pages/public/course-catalog.page').then((m) => m.CourseCatalogPageComponent),
+          import('./pages/public/course-catalog/course-catalog.page').then((m) => m.CourseCatalogPageComponent),
         title: 'Courses | MSS',
       },
       {
@@ -42,7 +42,7 @@ export const routes: Routes = [
       {
         path: 'packages',
         loadComponent: () =>
-          import('./pages/public/packages.page').then((m) => m.PackagesPageComponent),
+          import('./pages/public/packages/packages.page').then((m) => m.PackagesPageComponent),
         title: 'Packages | MSS',
       },
       {
@@ -127,4 +127,5 @@ export const routes: Routes = [
     redirectTo: '',
   },
 ];
+
 

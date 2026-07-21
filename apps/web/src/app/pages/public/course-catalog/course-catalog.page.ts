@@ -5,75 +5,13 @@ import { CatalogDataService } from '@mss-platform/data-access';
 import { CourseCatalogItem } from '@mss-platform/models';
 import { CourseCardComponent } from '@mss-platform/ui';
 
-import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
+import { COURSE_CATALOG_ITEMS } from '../../../data/course-catalog.data';
 
 @Component({
   selector: 'mss-course-catalog-page',
   imports: [FormsModule, CourseCardComponent],
-  template: `
-    <section class="mss-catalog-hero">
-      <p class="mss-eyebrow">Course Catalog</p>
-      <h1>Find the right MSS course or batch.</h1>
-      <p>
-        Browse structured academic courses with recorded lessons, live support,
-        quizzes, notes, and manual bKash/Nagad/Rocket enrollment flow.
-      </p>
-    </section>
-
-    @if (dataNotice()) {
-      <section class="mss-page-section">
-        <p class="mss-form-message">{{ dataNotice() }}</p>
-      </section>
-    }
-
-    <section class="mss-catalog-toolbar">
-      <label>
-        Search courses
-        <input
-          type="search"
-          [ngModel]="searchTerm()"
-          (ngModelChange)="searchTerm.set($event)"
-          placeholder="Search by subject, teacher, course..."
-        />
-      </label>
-
-      <label>
-        Subject
-        <select [ngModel]="selectedSubject()" (ngModelChange)="selectedSubject.set($event)">
-          <option value="all">All subjects</option>
-          <option value="Mathematics">Mathematics</option>
-          <option value="Physics">Physics</option>
-        </select>
-      </label>
-
-      <label>
-        Access
-        <select [ngModel]="selectedAccess()" (ngModelChange)="selectedAccess.set($event)">
-          <option value="all">All</option>
-          <option value="paid">Paid</option>
-          <option value="free">Free</option>
-        </select>
-      </label>
-    </section>
-
-    @if (isLoading()) {
-      <section class="mss-empty-state">
-        <h2>Loading courses...</h2>
-        <p>Please wait while MSS loads the latest course catalog.</p>
-      </section>
-    } @else {
-      <section class="mss-course-grid" aria-label="Course list">
-        @for (course of filteredCourses(); track course.id) {
-          <mss-course-card [course]="course" />
-        } @empty {
-          <div class="mss-empty-state">
-            <h2>No courses found</h2>
-            <p>Try changing your search or filter.</p>
-          </div>
-        }
-      </section>
-    }
-  `,
+  templateUrl: './course-catalog.page.html',
+  styleUrl: './course-catalog.page.scss',
 })
 export class CourseCatalogPageComponent implements OnInit {
   private readonly catalogDataService = inject(CatalogDataService);
