@@ -1,6 +1,7 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
+import { CatalogDataService } from '@mss-platform/data-access';
 import { CourseCatalogItem } from '@mss-platform/models';
 
 import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
@@ -9,7 +10,19 @@ import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
   selector: 'mss-course-detail-page',
   imports: [RouterLink],
   template: `
-    @if (course(); as selectedCourse) {
+    @if (isLoading()) {
+      <section class="mss-page-section">
+        <p class="mss-eyebrow">Loading Course</p>
+        <h1>Preparing course details...</h1>
+        <p>Please wait while MSS loads the latest course information.</p>
+      </section>
+    } @else if (course(); as selectedCourse) {
+      @if (dataNotice()) {
+        <section class="mss-page-section">
+          <p class="mss-form-message">{{ dataNotice() }}</p>
+        </section>
+      }
+
       <section class="mss-course-detail">
         <div>
           <p class="mss-eyebrow">{{ selectedCourse.academicLevel }}</p>
@@ -122,14 +135,17 @@ import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
     }
   `,
 })
-export class CourseDetailPageComponent {
+export class CourseDetailPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
+  private readonly catalogDataService = inject(CatalogDataService);
 
-  protected readonly course = computed(() => {
-    const slug = this.route.snapshot.paramMap.get('slug');
+  protected readonly course = signal<CourseCatalogItem | null>(null);
+  protected readonly isLoading = signal(false);
+  protected readonly dataNotice = signal('');
 
-    return COURSE_CATALOG_ITEMS.find((courseItem) => courseItem.slug === slug) ?? null;
-  });
+  ngOnInit(): void {
+    void this.loadCourse();
+  }
 
   protected learningOutcomes(course: CourseCatalogItem): string[] {
     if (course.subject === 'Physics') {
@@ -192,5 +208,38 @@ export class CourseDetailPageComponent {
       },
     ];
   }
-}
 
+  private async loadCourse(): Promise<void> {
+    const slug = this.route.snapshot.paramMap.get('slug');
+
+    if (!slug) {
+      this.course.set(null);
+      return;
+    }
+
+    const fallbackCourse = COURSE_CATALOG_ITEMS.find((courseItem) => courseItem.slug === slug) ?? null;
+
+    if (!this.catalogDataService.isConfigured()) {
+      this.course.set(fallbackCourse);
+      this.dataNotice.set('Demo course detail is shown because Supabase is not configured yet.');
+      return;
+    }
+
+    this.isLoading.set(true);
+    this.dataNotice.set('');
+
+    try {
+      const course = await this.catalogDataService.getPublishedCourseBySlug(slug);
+      this.course.set(course);
+    } catch (error) {
+      this.course.set(fallbackCourse);
+      this.dataNotice.set(
+        error instanceof Error
+          ? `${error.message} Showing demo course detail for now.`
+          : 'Course detail could not be loaded. Showing demo course detail for now.'
+      );
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
+}

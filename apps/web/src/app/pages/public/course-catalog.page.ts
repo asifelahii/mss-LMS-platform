@@ -1,6 +1,7 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { CatalogDataService } from '@mss-platform/data-access';
 import { CourseCatalogItem } from '@mss-platform/models';
 import { CourseCardComponent } from '@mss-platform/ui';
 
@@ -18,6 +19,12 @@ import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
         quizzes, notes, and manual bKash/Nagad/Rocket enrollment flow.
       </p>
     </section>
+
+    @if (dataNotice()) {
+      <section class="mss-page-section">
+        <p class="mss-form-message">{{ dataNotice() }}</p>
+      </section>
+    }
 
     <section class="mss-catalog-toolbar">
       <label>
@@ -49,24 +56,35 @@ import { COURSE_CATALOG_ITEMS } from '../../data/course-catalog.data';
       </label>
     </section>
 
-    <section class="mss-course-grid" aria-label="Course list">
-      @for (course of filteredCourses(); track course.id) {
-        <mss-course-card [course]="course" />
-      } @empty {
-        <div class="mss-empty-state">
-          <h2>No courses found</h2>
-          <p>Try changing your search or filter.</p>
-        </div>
-      }
-    </section>
+    @if (isLoading()) {
+      <section class="mss-empty-state">
+        <h2>Loading courses...</h2>
+        <p>Please wait while MSS loads the latest course catalog.</p>
+      </section>
+    } @else {
+      <section class="mss-course-grid" aria-label="Course list">
+        @for (course of filteredCourses(); track course.id) {
+          <mss-course-card [course]="course" />
+        } @empty {
+          <div class="mss-empty-state">
+            <h2>No courses found</h2>
+            <p>Try changing your search or filter.</p>
+          </div>
+        }
+      </section>
+    }
   `,
 })
-export class CourseCatalogPageComponent {
+export class CourseCatalogPageComponent implements OnInit {
+  private readonly catalogDataService = inject(CatalogDataService);
+
   protected readonly searchTerm = signal('');
   protected readonly selectedSubject = signal('all');
   protected readonly selectedAccess = signal('all');
 
   protected readonly courses = signal<CourseCatalogItem[]>(COURSE_CATALOG_ITEMS);
+  protected readonly isLoading = signal(false);
+  protected readonly dataNotice = signal('');
 
   protected readonly filteredCourses = computed(() => {
     const search = this.searchTerm().trim().toLowerCase();
@@ -88,4 +106,33 @@ export class CourseCatalogPageComponent {
       return matchesSearch && matchesSubject && matchesAccess;
     });
   });
+
+  ngOnInit(): void {
+    void this.loadCourses();
+  }
+
+  private async loadCourses(): Promise<void> {
+    if (!this.catalogDataService.isConfigured()) {
+      this.courses.set(COURSE_CATALOG_ITEMS);
+      this.dataNotice.set('Demo catalog is shown because Supabase is not configured yet.');
+      return;
+    }
+
+    this.isLoading.set(true);
+    this.dataNotice.set('');
+
+    try {
+      const courses = await this.catalogDataService.listPublishedCourses();
+      this.courses.set(courses);
+    } catch (error) {
+      this.courses.set(COURSE_CATALOG_ITEMS);
+      this.dataNotice.set(
+        error instanceof Error
+          ? `${error.message} Showing demo catalog for now.`
+          : 'Course catalog could not be loaded. Showing demo catalog for now.'
+      );
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
 }
