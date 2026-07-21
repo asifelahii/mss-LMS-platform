@@ -1,25 +1,4 @@
-@'
-
-## Sprint 8B-2 Completed
-
-- [x] Refactored layout components into component-named folders
-- [x] Split PublicLayoutComponent into TS, HTML, and SCSS files
-- [x] Split DashboardLayoutComponent into TS, HTML, and SCSS files
-- [x] Updated route lazy imports to the new component paths
-- [x] Removed old flat inline-template layout component files
-
-## Sprint 8B-2 Convention
-
-For maintainability, MSS components should follow this structure:
-
-component-name/
-- component-name.component.ts
-- component-name.component.html
-- component-name.component.scss
-- component-name.component.spec.ts, optional
-
-Inline templates should be avoided except for very small temporary components.
-'@ | Add-Content "docs\sprints\sprint-08-professional-ui-polish.md"import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 import { AuthStateService, SupabaseAuthService } from '@mss-platform/auth';
