@@ -1,12 +1,7 @@
-import { inject, Injectable, InjectionToken } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-export interface SupabaseConfig {
-  url: string;
-  anonKey: string;
-}
-
-export const SUPABASE_CONFIG = new InjectionToken<SupabaseConfig>('SUPABASE_CONFIG');
+import { SUPABASE_CONFIG } from './supabase-config.token';
 
 @Injectable({
   providedIn: 'root',

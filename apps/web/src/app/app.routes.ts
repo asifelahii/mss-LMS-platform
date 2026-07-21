@@ -1,6 +1,19 @@
-import { Routes } from '@angular/router';
+import type { CanActivateFn, Routes } from '@angular/router';
 
-import { authGuard, guestGuard, roleGuard } from '@mss-platform/auth';
+import type { UserRole } from '@mss-platform/models';
+
+const lazyAuthGuard: CanActivateFn = (route, state) =>
+  import('@mss-platform/auth').then((m) => m.authGuard(route, state)) as ReturnType<CanActivateFn>;
+
+const lazyGuestGuard: CanActivateFn = (route, state) =>
+  import('@mss-platform/auth').then((m) => m.guestGuard(route, state)) as ReturnType<CanActivateFn>;
+
+function lazyRoleGuard(allowedRoles: UserRole[]): CanActivateFn {
+  return (route, state) =>
+    import('@mss-platform/auth').then((m) =>
+      m.roleGuard(allowedRoles)(route, state)
+    ) as ReturnType<CanActivateFn>;
+}
 
 export const routes: Routes = [
   {
@@ -42,14 +55,14 @@ export const routes: Routes = [
         path: 'login',
         loadComponent: () =>
           import('./pages/auth/login.page').then((m) => m.LoginPageComponent),
-        canActivate: [guestGuard],
+        canActivate: [lazyGuestGuard],
         title: 'Login | MSS',
       },
       {
         path: 'register',
         loadComponent: () =>
           import('./pages/auth/register.page').then((m) => m.RegisterPageComponent),
-        canActivate: [guestGuard],
+        canActivate: [lazyGuestGuard],
         title: 'Register | MSS',
       },
     ],
@@ -58,7 +71,7 @@ export const routes: Routes = [
     path: 'student',
     loadComponent: () =>
       import('./layouts/dashboard-layout.component').then((m) => m.DashboardLayoutComponent),
-    canActivate: [authGuard, roleGuard(['student', 'admin', 'super_admin'])],
+    canActivate: [lazyAuthGuard, lazyRoleGuard(['student', 'admin', 'super_admin'])],
     data: {
       portal: 'student',
     },
@@ -77,7 +90,7 @@ export const routes: Routes = [
     path: 'teacher',
     loadComponent: () =>
       import('./layouts/dashboard-layout.component').then((m) => m.DashboardLayoutComponent),
-    canActivate: [authGuard, roleGuard(['teacher', 'admin', 'super_admin'])],
+    canActivate: [lazyAuthGuard, lazyRoleGuard(['teacher', 'admin', 'super_admin'])],
     data: {
       portal: 'teacher',
     },
@@ -96,7 +109,7 @@ export const routes: Routes = [
     path: 'admin',
     loadComponent: () =>
       import('./layouts/dashboard-layout.component').then((m) => m.DashboardLayoutComponent),
-    canActivate: [authGuard, roleGuard(['admin', 'super_admin'])],
+    canActivate: [lazyAuthGuard, lazyRoleGuard(['admin', 'super_admin'])],
     data: {
       portal: 'admin',
     },

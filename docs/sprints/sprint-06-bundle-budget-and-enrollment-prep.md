@@ -23,3 +23,18 @@ The safer approach is now route-driven:
 - Dashboard layout handles logout and current auth state display
 
 This keeps public browsing lighter and prepares the app for future feature growth.
+
+## Sprint 6B Completed
+
+- [x] Added lightweight Supabase config token file
+- [x] Updated SupabaseClientService to consume the lightweight config token
+- [x] Exported Supabase config token from data-access library
+- [x] Replaced static auth guard imports in app routes with lazy guard wrappers
+- [x] Updated app config to import lightweight provider tokens directly
+- [x] Reduced risk of auth/data-access/Supabase code entering the initial bundle
+
+## Sprint 6B Notes
+
+The route file no longer imports auth guards statically from the auth barrel. Guards are now loaded only when a guarded route is evaluated.
+
+The app config now avoids importing provider tokens from library barrels. This is intentionally done to reduce initial bundle pressure while the app is still small and close to the default bundle budget.
