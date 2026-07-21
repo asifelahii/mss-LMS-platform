@@ -35,3 +35,23 @@ We are not replacing the full theme. We are extending it with glass surfaces, so
 ## Sprint 8A Notes
 
 This sprint only changes presentation styling. It does not change Supabase logic, auth, catalog loading, or enrollment behavior.
+
+## Sprint 8B-2 Completed
+
+- [x] Refactored layout components into component-named folders
+- [x] Split PublicLayoutComponent into TS, HTML, and SCSS files
+- [x] Split DashboardLayoutComponent into TS, HTML, and SCSS files
+- [x] Updated route lazy imports to the new component paths
+- [x] Removed old flat inline-template layout component files
+
+## Sprint 8B-2 Convention
+
+For maintainability, MSS components should follow this structure:
+
+component-name/
+- component-name.component.ts
+- component-name.component.html
+- component-name.component.scss
+- component-name.component.spec.ts, optional
+
+Inline templates should be avoided except for very small temporary components.

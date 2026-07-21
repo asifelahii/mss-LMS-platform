@@ -1,4 +1,25 @@
-import { Component, computed, inject, signal } from '@angular/core';
+@'
+
+## Sprint 8B-2 Completed
+
+- [x] Refactored layout components into component-named folders
+- [x] Split PublicLayoutComponent into TS, HTML, and SCSS files
+- [x] Split DashboardLayoutComponent into TS, HTML, and SCSS files
+- [x] Updated route lazy imports to the new component paths
+- [x] Removed old flat inline-template layout component files
+
+## Sprint 8B-2 Convention
+
+For maintainability, MSS components should follow this structure:
+
+component-name/
+- component-name.component.ts
+- component-name.component.html
+- component-name.component.scss
+- component-name.component.spec.ts, optional
+
+Inline templates should be avoided except for very small temporary components.
+'@ | Add-Content "docs\sprints\sprint-08-professional-ui-polish.md"import { Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 import { AuthStateService, SupabaseAuthService } from '@mss-platform/auth';
@@ -11,40 +32,8 @@ interface DashboardNavLink {
 @Component({
   selector: 'mss-dashboard-layout',
   imports: [RouterLink, RouterOutlet],
-  template: `
-    <div class="mss-dashboard-shell">
-      <aside class="mss-dashboard-sidebar">
-        <a routerLink="/" class="mss-dashboard-brand" aria-label="MSS home">
-          <img src="/brand/mss-logo-square-64.png" alt="MSS" class="mss-dashboard-logo" />
-          <span>MSS</span>
-        </a>
-
-        <div class="mss-dashboard-user">
-          <span>Signed in as</span>
-          <strong>{{ displayName() }}</strong>
-          <small>{{ roleLabel() }}</small>
-        </div>
-
-        <nav class="mss-dashboard-nav" aria-label="Dashboard navigation">
-          @for (link of dashboardLinks(); track link.href) {
-            <a [routerLink]="link.href">{{ link.label }}</a>
-          }
-        </nav>
-
-        <button type="button" class="mss-dashboard-logout" (click)="logout()" [disabled]="isLoggingOut()">
-          {{ isLoggingOut() ? 'Logging out...' : 'Logout' }}
-        </button>
-
-        @if (message()) {
-          <p class="mss-dashboard-message">{{ message() }}</p>
-        }
-      </aside>
-
-      <section class="mss-dashboard-content">
-        <router-outlet />
-      </section>
-    </div>
-  `,
+  templateUrl: './dashboard-layout.component.html',
+  styleUrl: './dashboard-layout.component.scss',
 })
 export class DashboardLayoutComponent {
   private readonly authState = inject(AuthStateService);

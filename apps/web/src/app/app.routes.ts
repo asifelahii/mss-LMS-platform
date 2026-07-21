@@ -19,7 +19,7 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./layouts/public-layout.component').then((m) => m.PublicLayoutComponent),
+      import('./layouts/public-layout/public-layout.component').then((m) => m.PublicLayoutComponent),
     children: [
       {
         path: '',
@@ -70,7 +70,7 @@ export const routes: Routes = [
   {
     path: 'student',
     loadComponent: () =>
-      import('./layouts/dashboard-layout.component').then((m) => m.DashboardLayoutComponent),
+      import('./layouts/dashboard-layout/dashboard-layout.component').then((m) => m.DashboardLayoutComponent),
     canActivate: [lazyAuthGuard, lazyRoleGuard(['student', 'admin', 'super_admin'])],
     data: {
       portal: 'student',
@@ -89,7 +89,7 @@ export const routes: Routes = [
   {
     path: 'teacher',
     loadComponent: () =>
-      import('./layouts/dashboard-layout.component').then((m) => m.DashboardLayoutComponent),
+      import('./layouts/dashboard-layout/dashboard-layout.component').then((m) => m.DashboardLayoutComponent),
     canActivate: [lazyAuthGuard, lazyRoleGuard(['teacher', 'admin', 'super_admin'])],
     data: {
       portal: 'teacher',
@@ -108,7 +108,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     loadComponent: () =>
-      import('./layouts/dashboard-layout.component').then((m) => m.DashboardLayoutComponent),
+      import('./layouts/dashboard-layout/dashboard-layout.component').then((m) => m.DashboardLayoutComponent),
     canActivate: [lazyAuthGuard, lazyRoleGuard(['admin', 'super_admin'])],
     data: {
       portal: 'admin',
@@ -127,3 +127,4 @@ export const routes: Routes = [
     redirectTo: '',
   },
 ];
+
