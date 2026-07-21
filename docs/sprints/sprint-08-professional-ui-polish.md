@@ -83,3 +83,16 @@ This is a structure-only refactor. Public course, package, and homepage Supabase
 ## Sprint 8B-3 Batch 2 Notes
 
 This is a structure-only refactor. Course detail loading, enrollment option loading, and pending enrollment submission behavior should remain unchanged.
+
+## Sprint 8B-3 Batch 3 Completed
+
+- [x] Moved LoginPageComponent into a component-named folder
+- [x] Split login page into TS, HTML, and SCSS files
+- [x] Moved RegisterPageComponent into a component-named folder
+- [x] Split register page into TS, HTML, and SCSS files
+- [x] Updated lazy route imports
+- [x] Removed old flat auth page files
+
+## Sprint 8B-3 Batch 3 Notes
+
+This is a structure-only refactor. Supabase login, registration, validation, and role redirect behavior should remain unchanged.

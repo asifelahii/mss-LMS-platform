@@ -54,14 +54,14 @@ export const routes: Routes = [
       {
         path: 'login',
         loadComponent: () =>
-          import('./pages/auth/login.page').then((m) => m.LoginPageComponent),
+          import('./pages/auth/login/login.page').then((m) => m.LoginPageComponent),
         canActivate: [lazyGuestGuard],
         title: 'Login | MSS',
       },
       {
         path: 'register',
         loadComponent: () =>
-          import('./pages/auth/register.page').then((m) => m.RegisterPageComponent),
+          import('./pages/auth/register/register.page').then((m) => m.RegisterPageComponent),
         canActivate: [lazyGuestGuard],
         title: 'Register | MSS',
       },
@@ -127,6 +127,7 @@ export const routes: Routes = [
     redirectTo: '',
   },
 ];
+
 
 
 
