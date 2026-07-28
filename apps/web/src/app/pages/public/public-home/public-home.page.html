@@ -4,18 +4,21 @@
       <p class="mss-eyebrow">MSS Online Coaching</p>
 
       <h1>
-        Math & Science ???? ??? structured, exam-focused, and easier to follow.
+        Math & Science courses that are structured, exam-focused, and easier to
+        follow.
       </h1>
 
       <p>
-        National University/Honours-level students can learn through organized
-        courses, recorded lessons, weekly practice, notes, quizzes, and
-        guided enrollment support.
+        National University and Honours-level students can learn through
+        organized courses, recorded lessons, weekly practice, notes, quizzes,
+        and guided support.
       </p>
 
       <div class="mss-home-hero__actions">
         <a routerLink="/courses" class="mss-primary-button">Browse Courses</a>
-        <a routerLink="/enroll" class="mss-secondary-button">Start Enrollment</a>
+        <a routerLink="/enroll" class="mss-secondary-button"
+          >Start Enrollment</a
+        >
       </div>
 
       <div class="mss-home-hero__badges" aria-label="MSS learning benefits">
@@ -31,7 +34,7 @@
 
       <div class="mss-home-selected-card">
         <span>Learning flow</span>
-        <strong>Course ? Payment ? TXN Submit ? Admin Approval</strong>
+        <strong>Course Selection > Payment > TXN Submit > Approval</strong>
         <p>Access is unlocked after manual verification.</p>
       </div>
 
@@ -41,7 +44,9 @@
         <span>Rocket</span>
       </div>
 
-      <a routerLink="/enroll" class="mss-primary-button mss-full-button">Enroll Now</a>
+      <a routerLink="/enroll" class="mss-primary-button mss-full-button"
+        >Enroll Now</a
+      >
     </aside>
   </section>
 
@@ -49,25 +54,37 @@
     <article>
       <span>01</span>
       <h2>Clear chapter plan</h2>
-      <p>Follow lessons in a structured order instead of jumping between scattered resources.</p>
+      <p>
+        Follow lessons in a structured order instead of jumping between
+        scattered resources.
+      </p>
     </article>
 
     <article>
       <span>02</span>
       <h2>Practice-focused learning</h2>
-      <p>Use quizzes, model questions, and weekly revision to prepare for exams step by step.</p>
+      <p>
+        Use quizzes, model questions, and weekly revision to prepare for exams
+        step by step.
+      </p>
     </article>
 
     <article>
       <span>03</span>
       <h2>Student support</h2>
-      <p>Get help with course access, payment verification, and learning-related support.</p>
+      <p>
+        Get help with course access, payment verification, and learning-related
+        support.
+      </p>
     </article>
 
     <article>
       <span>04</span>
       <h2>Protected dashboard</h2>
-      <p>Approved students can access enrolled courses, materials, and progress from one place.</p>
+      <p>
+        Approved students can access enrolled courses, materials, and progress
+        from one place.
+      </p>
     </article>
   </section>
 
@@ -76,32 +93,33 @@
       <div>
         <p class="mss-eyebrow">Featured Courses</p>
         <h2>Start with a focused academic course.</h2>
-        <p>Browse available MSS courses and pick the one that matches your current study target.</p>
+        <p>
+          Browse available MSS courses and pick the one that matches your
+          current study target.
+        </p>
       </div>
 
       <a routerLink="/courses" class="mss-text-link">View all courses</a>
     </div>
 
     @if (dataNotice()) {
-      <p class="mss-form-message">{{ dataNotice() }}</p>
-    }
-
-    @if (isLoading()) {
-      <div class="mss-empty-state">
-        <h2>Loading featured courses...</h2>
-        <p>Please wait while MSS loads the latest featured courses.</p>
-      </div>
+    <p class="mss-form-message">{{ dataNotice() }}</p>
+    } @if (isLoading()) {
+    <div class="mss-empty-state">
+      <h2>Loading featured courses...</h2>
+      <p>Please wait while MSS loads the latest featured courses.</p>
+    </div>
     } @else {
-      <div class="mss-home-course-grid">
-        @for (course of featuredCourses(); track course.id) {
-          <mss-course-card [course]="course" />
-        } @empty {
-          <div class="mss-empty-state">
-            <h2>No featured courses yet</h2>
-            <p>Published featured courses will appear here.</p>
-          </div>
-        }
+    <div class="mss-home-course-grid">
+      @for (course of featuredCourses(); track course.id) {
+      <mss-course-card [course]="course" />
+      } @empty {
+      <div class="mss-empty-state">
+        <h2>No featured courses yet</h2>
+        <p>Published featured courses will appear here.</p>
       </div>
+      }
+    </div>
     }
   </section>
 
@@ -137,7 +155,9 @@
       <article>
         <span>Step 4</span>
         <strong>Access unlocked</strong>
-        <p>Admin verifies payment and activates the student dashboard access.</p>
+        <p>
+          Admin verifies payment and activates the student dashboard access.
+        </p>
       </article>
     </div>
   </section>

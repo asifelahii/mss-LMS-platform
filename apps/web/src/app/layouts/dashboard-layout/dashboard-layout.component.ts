@@ -6,6 +6,7 @@ import { AuthStateService, SupabaseAuthService } from '@mss-platform/auth';
 interface DashboardNavLink {
   label: string;
   href: string;
+  icon: string;
 }
 
 @Component({
@@ -41,34 +42,90 @@ export class DashboardLayoutComponent {
 
     if (role === 'teacher') {
       return [
-        { label: 'Teacher Dashboard', href: '/teacher' },
-        { label: 'Courses', href: '/courses' },
-        { label: 'Packages', href: '/packages' },
+        {
+          label: 'Teacher Dashboard',
+          href: '/teacher',
+          icon: '¦',
+        },
+        {
+          label: 'Courses',
+          href: '/courses',
+          icon: '?',
+        },
+        {
+          label: 'Packages',
+          href: '/packages',
+          icon: '?',
+        },
       ];
     }
 
     if (role === 'admin' || role === 'super_admin' || role === 'support') {
       return [
-        { label: 'Admin Dashboard', href: '/admin' },
-        { label: 'Courses', href: '/courses' },
-        { label: 'Packages', href: '/packages' },
+        {
+          label: 'Admin Dashboard',
+          href: '/admin',
+          icon: '¦',
+        },
+        {
+          label: 'Courses',
+          href: '/courses',
+          icon: '?',
+        },
+        {
+          label: 'Packages',
+          href: '/packages',
+          icon: '?',
+        },
       ];
     }
 
     if (role === 'student') {
       return [
-        { label: 'Student Dashboard', href: '/student' },
-        { label: 'Courses', href: '/courses' },
-        { label: 'Packages', href: '/packages' },
+        {
+          label: 'Student Dashboard',
+          href: '/student',
+          icon: '¦',
+        },
+        {
+          label: 'Courses',
+          href: '/courses',
+          icon: '?',
+        },
+        {
+          label: 'Packages',
+          href: '/packages',
+          icon: '?',
+        },
       ];
     }
 
     return [
-      { label: 'Student Dashboard', href: '/student' },
-      { label: 'Teacher Dashboard', href: '/teacher' },
-      { label: 'Admin Dashboard', href: '/admin' },
-      { label: 'Courses', href: '/courses' },
-      { label: 'Packages', href: '/packages' },
+      {
+        label: 'Student Dashboard',
+        href: '/student',
+        icon: '¦',
+      },
+      {
+        label: 'Teacher Dashboard',
+        href: '/teacher',
+        icon: '?',
+      },
+      {
+        label: 'Admin Dashboard',
+        href: '/admin',
+        icon: '?',
+      },
+      {
+        label: 'Courses',
+        href: '/courses',
+        icon: '?',
+      },
+      {
+        label: 'Packages',
+        href: '/packages',
+        icon: '?',
+      },
     ];
   });
 
@@ -80,7 +137,9 @@ export class DashboardLayoutComponent {
       await this.authService.logout();
       await this.router.navigateByUrl('/login');
     } catch (error) {
-      this.message.set(error instanceof Error ? error.message : 'Logout failed. Please try again.');
+      this.message.set(
+        error instanceof Error ? error.message : 'Logout failed. Please try again.'
+      );
     } finally {
       this.isLoggingOut.set(false);
     }

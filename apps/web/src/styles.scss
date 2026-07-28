@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 html {
   @include mat.theme(
@@ -289,7 +289,11 @@ a {
   border: 1px solid var(--mss-border);
   border-radius: 2rem;
   background:
-    radial-gradient(circle at top left, rgba(15, 118, 110, 0.16), transparent 34rem),
+    radial-gradient(
+      circle at top left,
+      rgba(15, 118, 110, 0.16),
+      transparent 34rem
+    ),
     var(--mss-primary-dark);
   color: #ffffff;
   padding: clamp(1.5rem, 4vw, 3rem);
@@ -783,7 +787,11 @@ a {
 .mss-package-card.is-popular {
   border-color: rgba(15, 118, 110, 0.45);
   background:
-    radial-gradient(circle at top right, rgba(15, 118, 110, 0.12), transparent 18rem),
+    radial-gradient(
+      circle at top right,
+      rgba(15, 118, 110, 0.12),
+      transparent 18rem
+    ),
     #ffffff;
 }
 
@@ -1054,7 +1062,11 @@ a {
 
 .mss-enroll-card {
   background:
-    radial-gradient(circle at top right, rgba(15, 118, 110, 0.12), transparent 18rem),
+    radial-gradient(
+      circle at top right,
+      rgba(15, 118, 110, 0.12),
+      transparent 18rem
+    ),
     #ffffff;
 }
 
@@ -1437,8 +1449,16 @@ a {
 body {
   overflow-x: hidden;
   background:
-    radial-gradient(circle at 8% 8%, rgba(15, 118, 110, 0.14), transparent 26rem),
-    radial-gradient(circle at 92% 4%, rgba(12, 74, 110, 0.13), transparent 28rem),
+    radial-gradient(
+      circle at 8% 8%,
+      rgba(15, 118, 110, 0.14),
+      transparent 26rem
+    ),
+    radial-gradient(
+      circle at 92% 4%,
+      rgba(12, 74, 110, 0.13),
+      transparent 28rem
+    ),
     linear-gradient(180deg, #f8fbff 0%, var(--mss-bg) 46%, #f7faf8 100%);
   color: var(--mss-text);
   font-family:
@@ -1447,9 +1467,9 @@ body {
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
-    "Segoe UI",
-    "Noto Sans Bengali",
-    "Nirmala UI",
+    'Segoe UI',
+    'Noto Sans Bengali',
+    'Nirmala UI',
     Arial,
     sans-serif;
   text-rendering: optimizeLegibility;
@@ -1461,7 +1481,7 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  content: "";
+  content: '';
   background-image:
     linear-gradient(rgba(12, 74, 110, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(12, 74, 110, 0.035) 1px, transparent 1px);
@@ -1477,8 +1497,11 @@ body::before {
   width: min(100% - 1.5rem, 96rem);
   border: 1px solid var(--mss-glass-border);
   border-radius: 1.35rem;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.58));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.88),
+    rgba(255, 255, 255, 0.58)
+  );
   box-shadow: 0 18px 54px rgba(15, 32, 43, 0.08);
   backdrop-filter: blur(22px) saturate(150%);
   -webkit-backdrop-filter: blur(22px) saturate(150%);
@@ -1521,8 +1544,11 @@ body::before {
 .mss-nav-cta,
 .mss-primary-button {
   border: 1px solid rgba(255, 255, 255, 0.22);
-  background:
-    linear-gradient(135deg, var(--mss-primary), var(--mss-primary-dark));
+  background: linear-gradient(
+    135deg,
+    var(--mss-primary),
+    var(--mss-primary-dark)
+  );
   box-shadow:
     0 14px 34px rgba(12, 74, 110, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
@@ -1543,8 +1569,11 @@ body::before {
 
 .mss-secondary-button {
   border-color: rgba(18, 34, 51, 0.1);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.62));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.86),
+    rgba(255, 255, 255, 0.62)
+  );
   box-shadow:
     0 12px 32px rgba(15, 32, 43, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -1575,10 +1604,13 @@ body::before {
   width: min(32rem, 52vw);
   height: min(32rem, 52vw);
   border-radius: 999px;
-  background:
-    radial-gradient(circle, rgba(15, 118, 110, 0.18), transparent 68%);
+  background: radial-gradient(
+    circle,
+    rgba(15, 118, 110, 0.18),
+    transparent 68%
+  );
   filter: blur(12px);
-  content: "";
+  content: '';
 }
 
 .mss-hero-content h1,
@@ -1618,8 +1650,11 @@ body::before {
 .mss-feature-grid article,
 .mss-stats-strip article {
   border-color: rgba(255, 255, 255, 0.7);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.56));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.86),
+    rgba(255, 255, 255, 0.56)
+  );
   box-shadow: var(--mss-shadow-soft);
   backdrop-filter: blur(22px) saturate(145%);
   -webkit-backdrop-filter: blur(22px) saturate(145%);
@@ -1637,7 +1672,7 @@ body::before {
   border-radius: 999px;
   background: rgba(15, 118, 110, 0.16);
   filter: blur(28px);
-  content: "";
+  content: '';
 }
 
 .mss-eyebrow,
@@ -1692,35 +1727,18 @@ body::before {
   }
 }
 
-
 /* --------------------------------------------------------------------------
    Sprint 8B-1: MSS typography correction
    -------------------------------------------------------------------------- */
 
 :root {
   --mss-font-body:
-    "Hind Siliguri",
-    "Noto Sans Bengali",
-    "Nirmala UI",
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Arial,
-    sans-serif;
+    'Hind Siliguri', 'Noto Sans Bengali', 'Nirmala UI', ui-sans-serif,
+    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 
   --mss-font-heading:
-    "Manrope",
-    "Hind Siliguri",
-    "Noto Sans Bengali",
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Arial,
-    sans-serif;
+    'Manrope', 'Hind Siliguri', 'Noto Sans Bengali', ui-sans-serif, system-ui,
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
 body {
@@ -1797,4 +1815,3 @@ textarea {
     letter-spacing: -0.035em;
   }
 }
-

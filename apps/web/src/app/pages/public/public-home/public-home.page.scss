@@ -34,10 +34,12 @@
   margin: 0;
   color: var(--mss-primary-dark);
   font-family: var(--mss-font-heading);
-  font-size: clamp(2.75rem, 6.6vw, 5.9rem);
+  // font-size: clamp(2.75rem, 6.6vw, 5.9rem);
+  font-size: clamp(2.8rem, 4.2vw, 4.4rem);
   font-weight: 850;
-  line-height: 0.98;
-  letter-spacing: -0.06em;
+  line-height: 1.05;
+  // letter-spacing: -0.06em;
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 
@@ -82,8 +84,11 @@
 .mss-home-process,
 .mss-home-final-cta {
   border: 1px solid rgba(255, 255, 255, 0.72);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.58));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.58)
+  );
   box-shadow:
     0 24px 70px rgba(15, 32, 43, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.84);
@@ -120,7 +125,11 @@
   border: 1px solid rgba(12, 74, 110, 0.1);
   border-radius: 1.35rem;
   background:
-    radial-gradient(circle at top left, rgba(15, 118, 110, 0.14), transparent 18rem),
+    radial-gradient(
+      circle at top left,
+      rgba(15, 118, 110, 0.14),
+      transparent 18rem
+    ),
     rgba(255, 255, 255, 0.68);
   padding: 1rem;
 }

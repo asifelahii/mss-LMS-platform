@@ -1,0 +1,164 @@
+<section class="mss-admin-page">
+  <div class="mss-admin-header">
+    <div>
+      <p class="mss-eyebrow">Course Management</p>
+
+      <h1>Create Course</h1>
+
+      <p>Add a new MSS academic course.</p>
+    </div>
+  </div>
+
+  <form
+    class="mss-course-form"
+    [formGroup]="courseForm"
+    (ngSubmit)="saveCourse()"
+  >
+    <section>
+      <h2>Basic Information</h2>
+
+      <div class="mss-grid">
+        <label>
+          Course title
+          <input
+            formControlName="title"
+            placeholder="Example: Calculus 1 Complete Course"
+          />
+        </label>
+
+        <label>
+          Teacher
+          <input formControlName="teacherName" />
+        </label>
+
+        <label class="full">
+          Subtitle
+
+          <textarea rows="3" formControlName="subtitle"></textarea>
+        </label>
+
+        <label>
+          Academic Level
+
+          <select formControlName="academicLevel">
+            <option>Honours 1st Year</option>
+
+            <option>Honours 2nd Year</option>
+
+            <option>Honours 3rd Year</option>
+          </select>
+        </label>
+
+        <label>
+          Subject
+
+          <select formControlName="subject">
+            <option>Mathematics</option>
+
+            <option>Physics</option>
+
+            <option>Science</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Pricing & Access</h2>
+
+      <div class="mss-grid">
+        <label>
+          Access Type
+
+          <select formControlName="accessType">
+            <option value="paid">Paid</option>
+
+            <option value="free">Free</option>
+          </select>
+        </label>
+
+        <label>
+          Price
+
+          <input formControlName="priceLabel" />
+        </label>
+
+        <label>
+          Discount Price
+
+          <input formControlName="discountedPriceLabel" />
+        </label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Course Structure</h2>
+
+      <div class="mss-grid">
+        <label>
+          Lessons
+
+          <input type="number" formControlName="totalLessons" />
+        </label>
+
+        <label>
+          Quizzes
+
+          <input type="number" formControlName="totalQuizzes" />
+        </label>
+
+        <label>
+          Duration
+
+          <input formControlName="durationLabel" />
+        </label>
+
+        <label>
+          Mode
+
+          <select formControlName="mode">
+            <option value="recorded">Recorded</option>
+
+            <option value="hybrid">Hybrid</option>
+
+            <option value="live">Live</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Publishing</h2>
+
+      <div class="mss-grid">
+        <label>
+          Tags
+
+          <input formControlName="tags" />
+        </label>
+
+        <label>
+          Status
+
+          <select formControlName="status">
+            <option value="draft">Draft</option>
+
+            <option value="published">Published</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    @if(submittedMessage){
+
+    <p class="mss-message">{{submittedMessage}}</p>
+
+    }
+
+    <div class="mss-actions">
+      <button class="mss-primary-button" type="submit">Save Course</button>
+
+      <a routerLink="/admin/courses" class="mss-secondary-button"> Cancel </a>
+    </div>
+  </form>
+</section>

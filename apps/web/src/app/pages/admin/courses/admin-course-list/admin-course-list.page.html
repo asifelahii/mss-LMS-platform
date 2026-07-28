@@ -1,0 +1,59 @@
+<section class="admin-course-page">
+  <header class="admin-course-header">
+    <div>
+      <p class="mss-eyebrow">Course Management</p>
+
+      <h1>Courses</h1>
+
+      <p>Create, edit and manage MSS academic courses.</p>
+    </div>
+
+    <a routerLink="/admin/courses/new" class="mss-primary-button">
+      + Create Course
+    </a>
+  </header>
+
+  @if(message()) {
+
+  <p class="mss-form-message">{{message()}}</p>
+
+  } @if(isLoading()) {
+
+  <section class="course-empty">Loading courses...</section>
+
+  } @else {
+
+  <section class="course-table">
+    <div class="course-row header">
+      <span> Title </span>
+
+      <span> Price </span>
+
+      <span> Status </span>
+
+      <span> Action </span>
+    </div>
+
+    @for(course of courses(); track course.id) {
+
+    <div class="course-row">
+      <span> {{course.title}} </span>
+
+      <span> {{course.priceLabel}} </span>
+
+      <span>
+        <span class="status"> {{course.accessType}} </span>
+      </span>
+
+      <button>Edit</button>
+    </div>
+
+    } @empty {
+
+    <div class="course-empty">No courses found.</div>
+
+    }
+  </section>
+
+  }
+</section>

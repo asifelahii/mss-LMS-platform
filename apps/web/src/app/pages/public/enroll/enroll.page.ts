@@ -1,8 +1,14 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  Injector,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
-import { AuthStateService, SupabaseAuthService } from '@mss-platform/auth';
 import {
   CatalogDataService,
   DbPaymentMethod,
@@ -17,6 +23,11 @@ interface SelectedEnrollmentContext {
   title: string;
   subtitle: string;
   priceLabel: string;
+
+  lessons: number;
+  quizzes: number;
+  duration: string;
+  mode: string;
 }
 
 type EnrollmentSelection =
@@ -39,12 +50,12 @@ type EnrollmentSelection =
 export class EnrollPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly formBuilder = inject(FormBuilder);
+  private readonly injector = inject(Injector);
   private readonly catalogDataService = inject(CatalogDataService);
   private readonly enrollmentDataService = inject(EnrollmentDataService);
-  private readonly authState = inject(AuthStateService);
-  private readonly authService = inject(SupabaseAuthService);
 
-  protected readonly courses = signal<CourseCatalogItem[]>(COURSE_CATALOG_ITEMS);
+  protected readonly courses =
+    signal<CourseCatalogItem[]>(COURSE_CATALOG_ITEMS);
   protected readonly packages = signal<CoursePackage[]>(COURSE_PACKAGES);
   protected readonly selectedValue = signal('');
   protected readonly submittedMessage = signal('');
@@ -52,39 +63,82 @@ export class EnrollPageComponent implements OnInit {
   protected readonly isLoadingOptions = signal(false);
   protected readonly isSubmitting = signal(false);
 
-  protected readonly selectedContext = computed<SelectedEnrollmentContext>(() => {
-    const selection = this.parseSelection(this.selectedValue());
+  protected readonly selectedContext = computed<SelectedEnrollmentContext>(
+    () => {
+      const selection = this.parseSelection(this.selectedValue());
 
-    if (selection?.type === 'course') {
-      const selectedCourse = this.courses().find((course) => course.id === selection.id);
+      if (selection?.type === 'course') {
+        const selectedCourse = this.courses().find(
+          (course) => course.id === selection.id,
+        );
 
-      if (selectedCourse) {
-        return {
-          title: selectedCourse.title,
-          subtitle: selectedCourse.subtitle,
-          priceLabel: selectedCourse.discountedPriceLabel || selectedCourse.priceLabel,
-        };
+        if (selectedCourse) {
+          // return {
+          //   title: selectedCourse.title,
+          //   subtitle: selectedCourse.subtitle,
+          //   priceLabel:
+          //     selectedCourse.discountedPriceLabel || selectedCourse.priceLabel,
+          // };
+          return {
+            title: selectedCourse.title,
+            subtitle: selectedCourse.subtitle,
+            priceLabel:
+              selectedCourse.discountedPriceLabel || selectedCourse.priceLabel,
+            lessons: selectedCourse.totalLessons,
+            quizzes: selectedCourse.totalQuizzes,
+            duration: selectedCourse.durationLabel,
+            mode: selectedCourse.mode,
+          };
+        }
       }
-    }
 
-    if (selection?.type === 'package') {
-      const selectedPackage = this.packages().find((coursePackage) => coursePackage.id === selection.id);
+      if (selection?.type === 'package') {
+        const selectedPackage = this.packages().find(
+          (coursePackage) => coursePackage.id === selection.id,
+        );
 
-      if (selectedPackage) {
-        return {
-          title: selectedPackage.title,
-          subtitle: selectedPackage.subtitle,
-          priceLabel: selectedPackage.discountedPriceLabel || selectedPackage.priceLabel,
-        };
+        if (selectedPackage) {
+          // return {
+          //   title: selectedPackage.title,
+          //   subtitle: selectedPackage.subtitle,
+          //   priceLabel:
+          //     selectedPackage.discountedPriceLabel ||
+          //     selectedPackage.priceLabel,
+          // };
+          return {
+            title: selectedPackage.title,
+            subtitle: selectedPackage.subtitle,
+            priceLabel:
+              selectedPackage.discountedPriceLabel ||
+              selectedPackage.priceLabel,
+            lessons:
+              'courses' in selectedPackage &&
+              Array.isArray(selectedPackage.courses)
+                ? selectedPackage.courses.length
+                : 0,
+            quizzes: 0,
+            duration: 'Package access',
+            mode: 'Multiple courses',
+          };
+        }
       }
-    }
 
-    return {
-      title: 'No course selected yet',
-      subtitle: 'Choose a course or package from the enrollment form.',
-      priceLabel: 'Manual selection',
-    };
-  });
+      // return {
+      //   title: 'No course selected yet',
+      //   subtitle: 'Choose a course or package from the enrollment form.',
+      //   priceLabel: 'Manual selection',
+      // };
+      return {
+        title: 'No course selected yet',
+        subtitle: 'Choose a course or package from the enrollment form.',
+        priceLabel: 'Manual selection',
+        lessons: 0,
+        quizzes: 0,
+        duration: '-',
+        mode: '-',
+      };
+    },
+  );
 
   protected readonly enrollmentForm = this.formBuilder.nonNullable.group({
     fullName: ['', [Validators.required, Validators.minLength(3)]],
@@ -106,7 +160,9 @@ export class EnrollPageComponent implements OnInit {
   }
 
   protected syncSelectedValue(): void {
-    this.selectedValue.set(this.enrollmentForm.controls.selectedCourseOrPackage.value);
+    this.selectedValue.set(
+      this.enrollmentForm.controls.selectedCourseOrPackage.value,
+    );
   }
 
   protected async submitEnrollment(): Promise<void> {
@@ -114,20 +170,26 @@ export class EnrollPageComponent implements OnInit {
 
     if (this.enrollmentForm.invalid) {
       this.enrollmentForm.markAllAsTouched();
-      this.submittedMessage.set('Please fill in the required enrollment and payment fields.');
+      this.submittedMessage.set(
+        'Please fill in the required enrollment and payment fields.',
+      );
       return;
     }
 
-    const selection = this.parseSelection(this.enrollmentForm.controls.selectedCourseOrPackage.value);
+    const selection = this.parseSelection(
+      this.enrollmentForm.controls.selectedCourseOrPackage.value,
+    );
 
     if (!selection) {
-      this.submittedMessage.set('Please select a course or package before submitting.');
+      this.submittedMessage.set(
+        'Please select a course or package before submitting.',
+      );
       return;
     }
 
     if (!this.enrollmentDataService.isConfigured()) {
       this.submittedMessage.set(
-        'Demo preview submitted locally. Configure Supabase and login as a student to create a real pending enrollment request.'
+        'Demo preview submitted locally. Configure Supabase and login as a student to create a real pending enrollment request.',
       );
       return;
     }
@@ -135,11 +197,18 @@ export class EnrollPageComponent implements OnInit {
     this.isSubmitting.set(true);
 
     try {
-      const profile = this.authState.currentProfile() ?? (await this.authService.loadCurrentProfile());
+      const { AuthStateService, SupabaseAuthService } = await import(
+        '@mss-platform/auth'
+      );
+      const authState = this.injector.get(AuthStateService);
+      const authService = this.injector.get(SupabaseAuthService);
+
+      const profile =
+        authState.currentProfile() ?? (await authService.loadCurrentProfile());
 
       if (!profile) {
         this.submittedMessage.set(
-          'Please login or register first. Real enrollment requests must be linked to a student profile.'
+          'Please login or register first. Real enrollment requests must be linked to a student profile.',
         );
         return;
       }
@@ -158,13 +227,13 @@ export class EnrollPageComponent implements OnInit {
       });
 
       this.submittedMessage.set(
-        'Enrollment request submitted. Admin will verify the payment before unlocking access.'
+        'Enrollment request submitted. Admin will verify the payment before unlocking access.',
       );
     } catch (error) {
       this.submittedMessage.set(
         error instanceof Error
           ? error.message
-          : 'Enrollment request failed. Please try again.'
+          : 'Enrollment request failed. Please try again.',
       );
     } finally {
       this.isSubmitting.set(false);
@@ -175,7 +244,9 @@ export class EnrollPageComponent implements OnInit {
     if (!this.catalogDataService.isConfigured()) {
       this.courses.set(COURSE_CATALOG_ITEMS);
       this.packages.set(COURSE_PACKAGES);
-      this.dataNotice.set('Demo enrollment options are shown because Supabase is not configured yet.');
+      this.dataNotice.set(
+        'Demo enrollment options are shown because Supabase is not configured yet.',
+      );
       this.applyInitialSelectionFromQuery();
       return;
     }
@@ -197,7 +268,7 @@ export class EnrollPageComponent implements OnInit {
       this.dataNotice.set(
         error instanceof Error
           ? `${error.message} Showing demo enrollment options for now.`
-          : 'Enrollment options could not be loaded. Showing demo options for now.'
+          : 'Enrollment options could not be loaded. Showing demo options for now.',
       );
     } finally {
       this.isLoadingOptions.set(false);
@@ -209,8 +280,12 @@ export class EnrollPageComponent implements OnInit {
     const courseSlug = this.route.snapshot.queryParamMap.get('course');
     const packageSlug = this.route.snapshot.queryParamMap.get('package');
 
-    const selectedCourse = this.courses().find((course) => course.slug === courseSlug);
-    const selectedPackage = this.packages().find((coursePackage) => coursePackage.slug === packageSlug);
+    const selectedCourse = this.courses().find(
+      (course) => course.slug === courseSlug,
+    );
+    const selectedPackage = this.packages().find(
+      (coursePackage) => coursePackage.slug === packageSlug,
+    );
 
     const selectionValue = selectedCourse
       ? `course:${selectedCourse.id}`
@@ -218,7 +293,9 @@ export class EnrollPageComponent implements OnInit {
         ? `package:${selectedPackage.id}`
         : '';
 
-    this.enrollmentForm.controls.selectedCourseOrPackage.setValue(selectionValue);
+    this.enrollmentForm.controls.selectedCourseOrPackage.setValue(
+      selectionValue,
+    );
     this.selectedValue.set(selectionValue);
   }
 
@@ -241,7 +318,9 @@ export class EnrollPageComponent implements OnInit {
     return numericValue ? Number(numericValue) : 0;
   }
 
-  private buildAdminNote(formValue: ReturnType<typeof this.enrollmentForm.getRawValue>): string {
+  private buildAdminNote(
+    formValue: ReturnType<typeof this.enrollmentForm.getRawValue>,
+  ): string {
     const noteParts = [
       `Student name: ${formValue.fullName}`,
       `Academic level: ${formValue.classLevel}`,

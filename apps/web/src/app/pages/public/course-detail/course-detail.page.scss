@@ -1,3 +1,276 @@
 :host {
   display: block;
 }
+
+.mss-course-detail {
+  display: grid;
+  grid-template-columns: 1.5fr 0.7fr;
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-bottom: 1.5rem;
+}
+
+.mss-course-detail > div,
+.mss-course-detail__card,
+.mss-detail-panel,
+.mss-content-preview,
+.mss-teacher-card,
+.mss-enroll-card {
+  border-radius: 2rem;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.92),
+    rgba(255, 255, 255, 0.65)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  box-shadow:
+    0 24px 70px rgba(15, 32, 43, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+  backdrop-filter: blur(18px);
+}
+
+.mss-course-detail > div {
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.mss-course-detail h1 {
+  margin: 0.5rem 0 1rem;
+
+  color: var(--mss-primary-dark);
+
+  font-family: var(--mss-font-heading);
+
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+
+  letter-spacing: -0.045em;
+}
+
+.mss-course-detail p {
+  color: rgba(18, 34, 51, 0.65);
+
+  line-height: 1.7;
+}
+
+.mss-course-detail__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+
+  margin: 1.5rem 0;
+}
+
+.mss-course-detail__tags span {
+  padding: 0.45rem 0.85rem;
+
+  border-radius: 999px;
+
+  background: rgba(15, 118, 110, 0.1);
+
+  color: var(--mss-accent);
+
+  font-size: 0.85rem;
+
+  font-weight: 750;
+}
+
+.mss-course-detail__actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 1rem;
+}
+
+.mss-primary-button,
+.mss-secondary-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 999px;
+
+  padding: 0.75rem 1.3rem;
+
+  font-weight: 800;
+}
+
+.mss-primary-button {
+  background: linear-gradient(
+    135deg,
+    var(--mss-primary),
+    var(--mss-primary-dark)
+  );
+
+  color: white;
+}
+
+.mss-secondary-button {
+  border: 1px solid rgba(15, 32, 43, 0.12);
+
+  background: white;
+}
+
+.mss-course-detail__card {
+  padding: 2rem;
+}
+
+.mss-course-detail__card p {
+  margin: 0;
+
+  color: rgba(18, 34, 51, 0.55);
+}
+
+.mss-course-detail__card strong {
+  display: block;
+
+  margin: 0.5rem 0 1.5rem;
+
+  color: var(--mss-primary-dark);
+
+  font-size: 2rem;
+}
+
+.mss-price-old {
+  display: block;
+
+  text-decoration: line-through;
+
+  color: rgba(18, 34, 51, 0.45);
+}
+
+.mss-course-detail__card ul {
+  padding: 0;
+
+  margin: 0;
+
+  list-style: none;
+
+  display: grid;
+
+  gap: 0.8rem;
+}
+
+.mss-course-detail__card li {
+  padding: 0.8rem;
+
+  border-radius: 1rem;
+
+  background: rgba(237, 247, 248, 0.8);
+}
+
+.mss-detail-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 1.5rem;
+
+  margin-bottom: 1.5rem;
+}
+
+.mss-detail-panel {
+  padding: 2rem;
+}
+
+.mss-detail-panel h2,
+.mss-content-preview h2,
+.mss-teacher-card h2,
+.mss-enroll-card h2 {
+  margin: 0.5rem 0 1rem;
+
+  color: var(--mss-primary-dark);
+}
+
+.mss-check-list {
+  display: grid;
+
+  gap: 0.8rem;
+}
+
+.mss-check-list span {
+  padding: 1rem;
+
+  border-radius: 1rem;
+
+  background: rgba(255, 255, 255, 0.7);
+
+  color: rgba(18, 34, 51, 0.72);
+}
+
+.mss-content-preview {
+  padding: 2rem;
+
+  margin-bottom: 1.5rem;
+}
+
+.mss-preview-list {
+  display: grid;
+
+  gap: 1rem;
+
+  margin-top: 1.5rem;
+}
+
+.mss-preview-list article {
+  padding: 1.2rem;
+
+  border-radius: 1.2rem;
+
+  background: rgba(237, 247, 248, 0.7);
+}
+
+.mss-preview-list span {
+  display: block;
+
+  color: var(--mss-accent);
+
+  font-size: 0.8rem;
+
+  font-weight: 800;
+}
+
+.mss-preview-list strong {
+  display: block;
+
+  margin: 0.3rem 0;
+
+  color: var(--mss-primary-dark);
+}
+
+.mss-preview-list small {
+  color: rgba(18, 34, 51, 0.6);
+}
+
+.mss-teacher-enrollment-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 1.5rem;
+}
+
+.mss-teacher-card,
+.mss-enroll-card {
+  padding: 2rem;
+}
+
+.mss-enroll-card ol {
+  padding-left: 1.2rem;
+
+  color: rgba(18, 34, 51, 0.7);
+
+  line-height: 1.9;
+}
+
+@media (max-width: 900px) {
+  .mss-course-detail,
+  .mss-detail-grid,
+  .mss-teacher-enrollment-grid {
+    grid-template-columns: 1fr;
+  }
+}

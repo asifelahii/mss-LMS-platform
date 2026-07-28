@@ -63,3 +63,33 @@ coverage/
 
 # Angular local environment override
 apps/web/src/environments/environment.local.ts
+
+
+# dependencies
+node_modules/
+
+# Angular/Nx build
+dist/
+.tmp/
+.cache/
+
+# environment
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Nx
+.nx/
+
+# coverage
+coverage/
