@@ -1,4 +1,4 @@
-import {
+﻿import {
   EnvironmentInjector,
   inject,
   runInInjectionContext,
@@ -84,6 +84,13 @@ export const routes: Routes = [
         title: 'Enroll | MSS',
       },
       {
+        path: 'video-test',
+        loadComponent: () =>
+          import('./pages/public/video-test/video-test.page').then(
+            (m) => m.VideoTestPageComponent,
+          ),
+        title: 'Video Test | MSS',
+      },      {
         path: 'login',
         loadComponent: () =>
           import('./pages/auth/login/login.page').then(
@@ -197,3 +204,4 @@ export const routes: Routes = [
     ],
   },
 ];
+
