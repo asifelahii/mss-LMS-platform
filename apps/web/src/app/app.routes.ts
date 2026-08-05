@@ -1,4 +1,4 @@
-﻿import {
+import {
   EnvironmentInjector,
   inject,
   runInInjectionContext,
@@ -84,6 +84,13 @@ export const routes: Routes = [
         title: 'Enroll | MSS',
       },
       {
+        path: 'free-player-test',
+        loadComponent: () =>
+          import(
+            './pages/public/free-player-test/free-player-test.page'
+          ).then((m) => m.FreePlayerTestPageComponent),
+        title: 'Free Video Player Test | MSS',
+      },      {
         path: 'video-test',
         loadComponent: () =>
           import('./pages/public/video-test/video-test.page').then(

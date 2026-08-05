@@ -1,0 +1,228 @@
+<section class="player-lab">
+  <header class="lab-header">
+    <p class="eyebrow">MSS FREE VIDEO LAB</p>
+
+    <h1>Free Player Deployment Test</h1>
+
+    <p>
+      This experiment compares an MSS-controlled YouTube player with a fully
+      custom HTML5 HLS player.
+    </p>
+  </header>
+
+  <article class="player-card">
+    <div class="card-heading">
+      <div>
+        <span class="number">01</span>
+
+        <div>
+          <p class="technology">YouTube IFrame API</p>
+          <h2>MSS-controlled YouTube player</h2>
+        </div>
+      </div>
+
+      <span class="free-badge">FREE</span>
+    </div>
+
+    <div #youtubeShell class="player-shell youtube-player-shell">
+      <div #youtubeHost class="youtube-host"></div>
+    </div>
+    <div class="youtube-access-note">
+      <div>
+        <strong>MSS lesson playback</strong>
+        <span>
+          Play, pause, seeking, volume and fullscreen are controlled
+          using the MSS controls below.
+        </span>
+      </div>
+
+      <span class="youtube-host-label">
+        Video delivery: YouTube
+      </span>
+    </div>
+
+    <div class="controls">
+      <button
+        type="button"
+        class="control-button primary"
+        (click)="toggleYoutubePlayback()"
+      >
+        {{ youtubePlaying() ? 'Pause' : 'Play' }}
+      </button>
+
+      <div class="timeline">
+        <input
+          type="range"
+          min="0"
+          max="100"
+          step="0.1"
+          [value]="youtubeProgress()"
+          (input)="seekYoutube($event)"
+          aria-label="YouTube playback position"
+        />
+
+        <span>
+          {{ youtubeCurrentTime() }} / {{ youtubeDuration() }}
+        </span>
+      </div>
+
+      <button
+        type="button"
+        class="control-button"
+        (click)="toggleYoutubeMute()"
+      >
+        {{ youtubeMuted() ? 'Unmute' : 'Mute' }}
+      </button>
+
+      <input
+        class="volume"
+        type="range"
+        min="0"
+        max="100"
+        step="1"
+        [value]="youtubeVolume()"
+        (input)="setYoutubeVolume($event)"
+        aria-label="YouTube volume"
+      />
+
+      <button
+        type="button"
+        class="control-button"
+        (click)="fullscreenYoutube()"
+      >
+        Fullscreen
+      </button>
+    </div>
+
+    <p class="status">{{ youtubeStatus() }}</p>
+
+    <p class="explanation">
+      The buttons belong to MSS, but YouTube still hosts and delivers the
+      underlying unlisted video.
+    </p>
+  </article>
+
+  <article class="player-card">
+    <div class="card-heading">
+      <div>
+        <span class="number">02</span>
+
+        <div>
+          <p class="technology">HTML5 Video + hls.js</p>
+          <h2>Fully custom MSS HLS player</h2>
+        </div>
+      </div>
+
+      <span class="free-badge">FREE TEST</span>
+    </div>
+
+    <div #hlsShell class="player-shell">
+      <video
+        #hlsVideo
+        playsinline
+        preload="metadata"
+        (play)="syncHlsState()"
+        (pause)="syncHlsState()"
+        (timeupdate)="syncHlsState()"
+        (loadedmetadata)="syncHlsState()"
+        (volumechange)="syncHlsState()"
+        (ended)="syncHlsState()"
+      >
+        Your browser does not support HTML5 video.
+      </video>
+
+      <div class="watermark dynamic-watermark">
+        MSS TEST USER â€¢ 04 AUG 2026
+      </div>
+    </div>
+
+    <div class="controls">
+      <button
+        type="button"
+        class="control-button primary"
+        (click)="toggleHlsPlayback()"
+      >
+        {{ hlsPlaying() ? 'Pause' : 'Play' }}
+      </button>
+
+      <div class="timeline">
+        <input
+          type="range"
+          min="0"
+          max="100"
+          step="0.1"
+          [value]="hlsProgress()"
+          (input)="seekHls($event)"
+          aria-label="HLS playback position"
+        />
+
+        <span>
+          {{ hlsCurrentTime() }} / {{ hlsDuration() }}
+        </span>
+      </div>
+
+      <button
+        type="button"
+        class="control-button"
+        (click)="toggleHlsMute()"
+      >
+        {{ hlsMuted() ? 'Unmute' : 'Mute' }}
+      </button>
+
+      <input
+        class="volume"
+        type="range"
+        min="0"
+        max="100"
+        step="1"
+        [value]="hlsVolume()"
+        (input)="setHlsVolume($event)"
+        aria-label="HLS volume"
+      />
+
+      <select
+        class="speed"
+        aria-label="Playback speed"
+        (change)="setHlsPlaybackRate($event)"
+      >
+        <option value="0.75">0.75Ã—</option>
+        <option value="1" selected>1Ã—</option>
+        <option value="1.25">1.25Ã—</option>
+        <option value="1.5">1.5Ã—</option>
+        <option value="2">2Ã—</option>
+      </select>
+
+      <button
+        type="button"
+        class="control-button"
+        (click)="fullscreenHls()"
+      >
+        Fullscreen
+      </button>
+    </div>
+
+    <p class="status">{{ hlsStatus() }}</p>
+
+    <p class="explanation">
+      This uses a public demonstration stream only to test our custom player,
+      fullscreen, seeking, volume, playback speed and watermark.
+    </p>
+  </article>
+
+  <aside class="test-panel">
+    <h2>Test after deployment</h2>
+
+    <div class="test-grid">
+      <span>Both videos load</span>
+      <span>Play and pause work</span>
+      <span>Seeking works</span>
+      <span>Volume works</span>
+      <span>Fullscreen works</span>
+      <span>Playback speed works</span>
+      <span>Watermark stays visible</span>
+      <span>Mobile browser works</span>
+      <span>Incognito browser works</span>
+      <span>Page refresh works</span>
+    </div>
+  </aside>
+</section>

@@ -17,6 +17,7 @@
     "@angular/router": "~22.0.4",
     "@supabase/supabase-js": "^2.110.7",
     "@tabler/icons": "^3.45.0",
+    "hls.js": "^1.6.16",
     "rxjs": "~7.8.0"
   },
   "devDependencies": {
